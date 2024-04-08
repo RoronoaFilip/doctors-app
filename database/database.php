@@ -10,7 +10,7 @@
       $host = 'localhost';
       $username = 'filip';
       $password = '12345';
-      $database_name = 'test';
+      $database_name = 'byte';
       $port = 3306;
 
       $this->connection = new mysqli($host, $username, $password, $database_name, $port);

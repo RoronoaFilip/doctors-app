@@ -36,7 +36,7 @@
     {
       $db = DbConnection::getConnection();
 
-      $sql = "SELECT * FROM test_user_table";
+      $sql = "SELECT * FROM users";
       $values = [];
 
       $users = $db->select($sql, $values);
@@ -50,7 +50,7 @@
     {
       $db = DbConnection::getConnection();
 
-      $sql = "SELECT * FROM test_user_table WHERE email = ?";
+      $sql = "SELECT * FROM users WHERE email = ?";
       $values = [$email];
 
       $result = $db->select($sql, $values);
@@ -72,7 +72,7 @@
     {
       $db = DbConnection::getConnection();
 
-      $sql = "INSERT INTO test_user_table ( email, password, first_name, last_name) VALUES ( ?, ?, ?, ?)";
+      $sql = "INSERT INTO users ( email, password, first_name, last_name) VALUES ( ?, ?, ?, ?)";
       $values = [$this->email, $this->password, $this->first_name, $this->last_name];
 
       $db->insert($sql, $values);
