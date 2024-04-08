@@ -8,8 +8,8 @@
     {
 
       $host = 'localhost';
-      $username = 'filip';
-      $password = '12345';
+      $username = 'admin';
+      $password = 'admin';
       $database_name = 'byte';
       $port = 3306;
 
