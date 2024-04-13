@@ -2,46 +2,29 @@
 
   class Database
   {
-    public $connection;
+    private $connection;
 
     public function __construct()
     {
-
       $host = 'localhost';
       $username = 'admin';
       $password = 'admin';
-      $database_name = 'byte';
+      $databaseName = 'byte';
       $port = 3306;
 
-      $this->connection = new mysqli($host, $username, $password, $database_name, $port);
+      $this->connection = new PDO("mysql:host=$host;dbname=$databaseName", $username, $password);
+      $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    public function insert(string $sql, array $values): void
+    public function getConnection(): PDO
     {
-      $stmt = $this->connection->prepare($sql);
-
-      $result = $stmt->execute($values);
-
-      if (!$result) {
-        throw new Exception($stmt->error);
-      }
+      return $this->connection;
     }
 
-    public function select(string $sql, array $values): array
+    public function close(): void
     {
-      $stmt = $this->connection->prepare($sql);
-
-      $result = $stmt->execute($values);
-
-      if (!$result) {
-        throw new Exception($stmt->error);
-      }
-
-      return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    }
-
-    public function closeConnection(): void
-    {
-      $this->connection->close();
+      $this->connection = null;
     }
   }
+
+
