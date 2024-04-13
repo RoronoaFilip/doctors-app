@@ -1,2 +1,2 @@
 <?php
-  header('Location: /welcome.php');
+  header('Location: /byte/welcome.php');
