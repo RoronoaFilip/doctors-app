@@ -37,9 +37,5 @@
     </div>
     <button type="submit" class="btn primary-btn align-center mt-4">Регистраране</button>
 </form>
-
-<?php
-  require_once 'shared/scripts.php';
-?>
 </body>
 </html>

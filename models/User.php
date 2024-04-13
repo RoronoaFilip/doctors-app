@@ -4,13 +4,14 @@
 
   class User
   {
-    public $id;
-    public $firstName;
-    public $lastName;
-    public $email;
-    public $password;
-    public $phone;
-    public $profilePictureUrl;
+    public int $id;
+    public string $firstName;
+    public string $lastName;
+    public string $email;
+    public string $password;
+    public string $phone;
+    public int $profilePictureId;
+    public Photo $profilePicture;
 
     public function __construct($firstName, $lastName, $email, $password)
     {
@@ -18,15 +19,5 @@
       $this->lastName = $lastName;
       $this->email = $email;
       $this->password = $password;
-    }
-
-    public function setPhone($phone)
-    {
-      $this->phone = $phone;
-    }
-
-    public function setProfilePictureUrl($profilePictureUrl)
-    {
-      $this->profilePictureUrl = $profilePictureUrl;
     }
   }

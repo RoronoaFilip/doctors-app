@@ -34,12 +34,18 @@
   }
 
 // Insert the user data into the database
-  $isSuccessful = $userService->create(new User($name, $surname, $email, $hashedPassword, false));
-  if ($isSuccessful) {
-    header('Location: /byte/login.php');
-    echo "Успешна регистрация.";
-  } else {
+  $createdUser = $userService->create(new User($name, $surname, $email, $hashedPassword));
+  if (!$createdUser) {
     echo "Грешка по време на регистрацията.";
+    exit();
   }
 
+  session_start();
+
+  $_SESSION['id'] = $createdUser->id;
+  $_SESSION['email'] = $createdUser->email;
+  $_SESSION['firstName'] = $createdUser->firstName;
+  $_SESSION['lastName'] = $createdUser->lastName;
+  $_SESSION['loginTime'] = time();
+  header('Location: /byte/main.php');
 
