@@ -9,8 +9,8 @@
 
   class Repository
   {
-    private Database $database;
-    private string $tableName;
+    protected Database $database;
+    protected string $tableName;
 
     public function __construct($tableName)
     {
@@ -52,7 +52,7 @@
       return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function insert($data): bool
+    public function insert($data): bool|object
     {
       $columns = array_keys($data);
       $placeholders = array_map(function ($value) {
@@ -70,6 +70,19 @@
         $query->bindValue($index, $value);
       }
 
-      return $query->execute();
+      $queryResult = $query->execute();
+
+      if (!$queryResult) {
+        return false;
+      }
+
+      $lastInsertedQuery = $this->database->getConnection()->prepare("SELECT LAST_INSERT_ID()");
+
+      return $lastInsertedQuery->execute();
+    }
+
+    public function getLastInsertId(): int
+    {
+      return $this->database->getConnection()->lastInsertId();
     }
   }
