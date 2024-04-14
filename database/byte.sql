@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2024 at 12:03 PM
+-- Generation Time: Apr 14, 2024 at 07:06 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,29 +24,56 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `photos`
+--
+
+CREATE TABLE `photos` (
+  `id` bigint(60) NOT NULL COMMENT 'ID of the photo',
+  `photo_url` mediumtext NOT NULL,
+  `alt` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Photos by url used in the application';
+
+--
+-- Dumping data for table `photos`
+--
+
+INSERT INTO `photos` (`id`, `photo_url`, `alt`) VALUES
+(1, '/public/photos/default_profile_picture.png', 'default_profile_picture');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL COMMENT 'primary key',
+  `id` bigint(20) NOT NULL COMMENT 'primary key',
   `first_name` varchar(50) NOT NULL COMMENT 'the user''s first name',
   `last_name` varchar(50) NOT NULL COMMENT 'the user''s last name',
   `email` varchar(50) NOT NULL COMMENT 'the user''s email',
   `password` varchar(300) NOT NULL COMMENT 'the user''s password',
-  `phone` varchar(50) DEFAULT NULL COMMENT 'the user''s phone'
+  `phone` varchar(50) DEFAULT NULL COMMENT 'the user''s phone',
+  `profile_picture_id` bigint(60) NOT NULL DEFAULT 1 COMMENT 'Foreign Key to the Profile picture'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci COMMENT='A table that represents a user';
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `phone`) VALUES
-(1, 'Filip', 'Filchev', 'filip@email.com', '$2y$10$QdXJrjhm0UAqE9rA36x1H.D31w5tqR7y4kK7ra5nTJkq5azE9wHNa', NULL),
-(2, 'admin', 'adminov', 'admin@admin.admin', '$2y$10$Ac6yjsOXdq8tIrHwfFCNdeDJpofDQGU4zlhTdRjXAbhBTT7R8gg0e', NULL);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `phone`, `profile_picture_id`) VALUES
+(1, 'Filip', 'Filchev', 'filip@email.com', '$2y$10$QdXJrjhm0UAqE9rA36x1H.D31w5tqR7y4kK7ra5nTJkq5azE9wHNa', NULL, 1),
+(2, 'admin', 'adminov', 'admin@admin.admin', '$2y$10$Ac6yjsOXdq8tIrHwfFCNdeDJpofDQGU4zlhTdRjXAbhBTT7R8gg0e', NULL, 1),
+(10, 'Test', 'Testov', 'test@test.com', '$2y$10$t/MqRWX69mC98Nmwp3TQWebnKPK5mN1DjH2pW8BO/7/m60m.yq2pq', NULL, 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `photos`
+--
+ALTER TABLE `photos`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -54,17 +81,34 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `phon
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`(30)),
-  ADD UNIQUE KEY `phone` (`phone`(30));
+  ADD UNIQUE KEY `phone` (`phone`(30)),
+  ADD KEY `profile_picture_fk` (`profile_picture_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `photos`
+--
+ALTER TABLE `photos`
+  MODIFY `id` bigint(60) NOT NULL AUTO_INCREMENT COMMENT 'ID of the photo', AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'primary key', AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'primary key', AUTO_INCREMENT=11;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `profile_picture_fk` FOREIGN KEY (`profile_picture_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
