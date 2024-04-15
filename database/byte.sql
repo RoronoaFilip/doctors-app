@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2024 at 10:05 AM
+-- Generation Time: Apr 14, 2024 at 07:06 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,33 +43,6 @@ INSERT INTO `photos` (`id`, `photo_url`, `alt`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `restaurants`
---
-
-CREATE TABLE `restaurants` (
-  `id` bigint(20) NOT NULL COMMENT 'restaurant''s id',
-  `name` varchar(50) NOT NULL COMMENT 'restaurant''s name',
-  `location` varchar(100) NOT NULL COMMENT 'restaurant''s location',
-  `capacity` bigint(20) NOT NULL COMMENT 'restaurant''s capacity',
-  `rating` float NOT NULL COMMENT 'restaurant''s raiting',
-  `phone` varchar(50) NOT NULL,
-  `picture` bigint(60) NOT NULL COMMENT 'Foreign key to pictures',
-  `email` varchar(50) NOT NULL COMMENT 'Restaurant''s email'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `restaurants`
---
-
-INSERT INTO `restaurants` (`id`, `name`, `location`, `capacity`, `rating`, `phone`, `picture`, `email`) VALUES
-(1, 'Грог', 'ж.к. Петко Р. Славейков, ж.к. Славейков 135, 8005 Бургас', 60, 4.4, '0876332988', 0, ''),
-(2, 'Romance Pizza', 'Парк Славейков до бл. 62, 8000 Бургас', 80, 4.5, '070020011', 0, ''),
-(3, ' Петте кьошета 3', 'Варна ЦентърОдесос, ул. „Македония“ 44, 9002 Варна', 50, 4.4, '0879313176', 0, ''),
-(4, 'Ресторант Санторини', 'Варна ЦентърПриморски, бул. „Цар Освободител“ 76г, 9000 Варна', 40, 4, '0898728807', 0, '');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
@@ -101,14 +74,6 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `phon
 --
 ALTER TABLE `photos`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `restaurants`
---
-ALTER TABLE `restaurants`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQUE` (`name`,`email`) USING BTREE,
-  ADD KEY `picture_foreign_key` (`picture`);
 
 --
 -- Indexes for table `users`
