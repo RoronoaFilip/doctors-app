@@ -5,8 +5,8 @@
   class Photo
   {
     public $id;
-    public $url;
-    public $alt;
+    public string $url;
+    public string $alt;
     public $userId;
 
     public function __construct($url, $alt)

@@ -1,0 +1,26 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    max-width: 70%;
+    margin: 10px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    &.edit {
+        align-items: center;
+    }
+}
+
+.profile h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 34px;
+    text-align: center;
+}
+
+
