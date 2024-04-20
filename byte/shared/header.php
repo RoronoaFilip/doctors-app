@@ -12,8 +12,6 @@
                             <a class="nav-link" href="/byte/restaurants.php">Restaurants</a>
                         </div>
                         <div class="nav-item"><a class="nav-link" href="/byte/profile.php">Profile</a></div>
-                        <div class="nav-item"><a class="nav-link">Another action</a></div>
-                        <div class="nav-item"><a class="nav-link">Something else here</a></div>
                         <div class="nav-item">
                             <a class="nav-link" href="/byte/logout.php">Изход</a>
                         </div>

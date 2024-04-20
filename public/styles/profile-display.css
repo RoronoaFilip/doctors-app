@@ -1,0 +1,111 @@
+.edit-button {
+    --button-length: 100px;
+
+    width: var(--button-length);
+    height: 55px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+
+    margin-top: 20px;
+
+    border-radius: 20px;
+    background-color: var(--primary-color);
+    box-shadow: 9px 9px 13px #c0bdbd,
+    -9px -9px 13px #ffffff;
+
+    &::before {
+        content: "";
+        width: 200%;
+        height: 200%;
+        background-color: var(--primary-color);
+        position: absolute;
+        z-index: 1;
+        transform: scale(0);
+        transition: all 0.3s;
+        border-radius: 50%;
+        filter: blur(10px);
+    }
+
+    &:hover::before {
+        transform: scale(1);
+    }
+
+    &:hover {
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.336);
+    }
+
+    & svg {
+        height: 17px;
+        fill: white;
+        z-index: 3;
+        transition: all 0.2s;
+        transform-origin: bottom;
+    }
+
+    &:hover svg {
+        transform: rotate(-15deg) translateX(5px);
+    }
+
+    &::after {
+        content: "";
+        width: calc(var(--button-length) / 2 - 4px);
+        height: 2px;
+        position: absolute;
+        bottom: 19px;
+        left: -5px;
+        background-color: white;
+        border-radius: 2px;
+        z-index: 2;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.5s ease-out;
+    }
+
+    &:hover::after {
+        transform: scaleX(1);
+        left: 0;
+        transform-origin: right;
+    }
+}
+
+.name-pic {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.profile-picture {
+    max-width: 20%;
+    margin-right: 20px;
+    border: 2px solid #ddd;
+
+    &.edit {
+        max-width: 40%;
+
+        align-self: center;
+    }
+}
+
+.profile-info {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-info li {
+    margin-bottom: 10px;
+    color: #555;
+    font-size: 24px;
+}
+
+.profile-info li strong {
+    color: #333;
+    font-weight: bold;
+    margin-right: 10px;
+}

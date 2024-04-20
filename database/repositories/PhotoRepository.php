@@ -14,12 +14,25 @@
       parent::__construct('photos');
     }
 
-    public function create(Photo $photo): bool
+    public function updateUserProfilePicture(Photo $photo, $newProfilePictureUrl): bool|Photo|null
     {
-      return $this->insert([
-          "url" => $photo->url,
-          "alt" => $photo->alt,
+      $oldPhoto = $this->getById($photo->id);
+
+      if (!$oldPhoto || $photo->id === 1) {
+        $newPhoto = new Photo($newProfilePictureUrl, $photo->alt);
+        return $this->create($newPhoto);
+      }
+
+      $result = $this->update($oldPhoto->id, [
+          "photo_url" => $newProfilePictureUrl,
+          "alt" => $oldPhoto->alt,
       ]);
+
+      if (!$result) {
+        return false;
+      }
+
+      return $this->getById($photo->id);
     }
 
     public function getById($id): ?Photo
@@ -43,5 +56,19 @@
       );
       $photo->id = $foundPhoto['id'] ?? null;
       return $photo;
+    }
+
+    public function create(Photo $photo): ?Photo
+    {
+      $result = $this->insert([
+          "photo_url" => $photo->url,
+          "alt" => $photo->alt,
+      ]);
+
+      if (!$result) {
+        return null;
+      }
+
+      return $this->getById($this->getLastInsertId());
     }
   }

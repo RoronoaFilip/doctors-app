@@ -2,7 +2,7 @@
 
   namespace repositories;
 
-  use models\User;
+  use models\Restaurant;
 
   require_once __DIR__ . '/Repository.php';
   require_once __DIR__ . '/PhotoRepository.php';
@@ -16,24 +16,6 @@
     {
       parent::__construct('restaurants');
       $this->photoRepository = new PhotoRepository();
-    }
-
-    public function create(Restaurant $restaurant): bool|Restaurant
-    {
-      $result = $this->insert([
-          "name" => $restaurant->name,
-          "location" => $restaurant->location,
-          "capacity" => $restaurant->capacity,
-          "rating" => $restaurant->rating,
-          "email" => $restaurant->email
-
-      ]);
-
-      if (!$result) {
-        return false;
-      }
-
-      return $this->getById($this->getLastInsertId());
     }
 
     public function getById($id): ?Restaurant
@@ -66,18 +48,5 @@
       $restaurant->profilePicture->userId = $restaurant->id;
 
       return $restaurant;
-    }
-
-    public function getByEmail($email): ?Restaurant
-    {
-      $restaurants = $this->select([
-          "email" => $email
-      ]);
-
-      if (!$restaurants) {
-        return null;
-      }
-
-      return $this->constructUser($restaurants[0]);
     }
   }
