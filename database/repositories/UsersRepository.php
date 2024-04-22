@@ -65,6 +65,27 @@
       return $user;
     }
 
+    public function updateProfilePicture($email, $profilePicturePath): bool|User
+    {
+      $user = $this->getByEmail($email);
+      $photo = $user->profilePicture;
+
+      $newPhoto = $this->photoRepository->updateUserProfilePicture($photo, $profilePicturePath);
+      if (!$newPhoto) {
+        return false;
+      }
+
+      $result = $this->update($user->id, [
+          "profile_picture_id" => $newPhoto->id
+      ]);
+
+      if (!$result) {
+        return false;
+      }
+
+      return $this->getById($user->id);
+    }
+
     public function getByEmail($email): ?User
     {
       $users = $this->select([
