@@ -10,7 +10,7 @@
     public $capacity;
     public $rating;
     public $phone;
-    public $email
+    public $email;
     public int $profilePictureId;
     public Photo $profilePicture;
 
