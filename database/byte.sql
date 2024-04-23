@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2024 at 03:50 PM
+-- Generation Time: Apr 22, 2024 at 10:02 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -57,18 +57,44 @@ CREATE TABLE `restaurants` (
   `rating` float NOT NULL COMMENT 'restaurant''s raiting',
   `phone` varchar(50) NOT NULL,
   `picture_id` bigint(60) DEFAULT 1 COMMENT 'Foreign key to pictures',
-  `email` varchar(50) NOT NULL COMMENT 'Restaurant''s email'
+  `email` varchar(50) NOT NULL COMMENT 'Restaurant''s email',
+  `description` varchar(200) NOT NULL COMMENT 'Restaurant''s description'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `restaurants`
 --
 
-INSERT INTO `restaurants` (`id`, `name`, `location`, `capacity`, `rating`, `phone`, `picture_id`, `email`) VALUES
-(1, 'Грог', 'ж.к. Петко Р. Славейков, ж.к. Славейков 135, 8005 Бургас', 60, 4.4, '0876332988', 1, ''),
-(2, 'Romance Pizza', 'Парк Славейков до бл. 62, 8000 Бургас', 80, 4.5, '070020011', 1, ''),
-(3, ' Петте кьошета 3', 'Варна ЦентърОдесос, ул. „Македония“ 44, 9002 Варна', 50, 4.4, '0879313176', 1, ''),
-(4, 'Ресторант Санторини', 'Варна ЦентърПриморски, бул. „Цар Освободител“ 76г, 9000 Варна', 40, 4, '0898728807', 1, '');
+INSERT INTO `restaurants` (`id`, `name`, `location`, `capacity`, `rating`, `phone`, `picture_id`, `email`, `description`) VALUES
+(1, 'Грог', 'ж.к. Петко Р. Славейков, ж.к. Славейков 135, 8005 Бургас', 60, 4.4, '0876332988', 1, 'grog@abv.bg', 'суши бар, заведение с доставка, live music, вино бар, бистро, bar & dinner, кафе, винарна, бирария, бързо хранене, сладкарница, пицария, бар, ресторант'),
+(2, 'Romance Pizza', 'Парк Славейков до бл. 62, 8000 Бургас', 80, 4.5, '070020011', 1, 'romance@abv.bg', 'ПРЕЗ 2005 ПИЦАТА СТАНА ПО-ДОБРА.\r\n\r\nС ПО-ДОБРА, РАЗТОЧЕНА НА РЪКА, ТЪНКА И ХРУПКАВА ОСНОВА ОТ АВТЕНТИЧНО ИТАЛИАНСКО БРАШНО И СТУДЕНО ПРЕСОВАН ЗЕХТИН.\r\n\r\nПО-ДОБРА, 100% НАТУРАЛНА ДОМАТЕНА ПАСТА, ПРЕСНИ'),
+(3, ' Петте кьошета 3', 'Варна ЦентърОдесос, ул. „Македония“ 44, 9002 Варна', 50, 4.4, '0879313176', 1, 'pettekusheta@abv.bg', 'Открийте перфектната хапка удоволствие в центъра на град Варна. Вече не е необходимо да отскачате до миналото, за да се насладите на традиционната българска кухня.'),
+(4, 'Ресторант Санторини', 'Варна ЦентърПриморски, бул. „Цар Освободител“ 76г, 9000 Варна', 40, 4, '0898728807', 1, 'santorini_restaurant@abv.bg', 'Най-прекрасното BBQ в града!');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `restaurants_comments`
+--
+
+CREATE TABLE `restaurants_comments` (
+  `id` bigint(20) NOT NULL,
+  `comment` varchar(200) NOT NULL COMMENT 'Comment on restaurant',
+  `restaurant_id` bigint(20) NOT NULL COMMENT 'Foreign key to restaurant',
+  `user_id` bigint(20) NOT NULL COMMENT 'Foreign key to user'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `restaurants_photos`
+--
+
+CREATE TABLE `restaurants_photos` (
+  `id` bigint(20) NOT NULL,
+  `restaurant_id` bigint(20) NOT NULL COMMENT 'Foreign key to restaurant',
+  `photo_id` bigint(20) NOT NULL COMMENT 'Foreign key to photo'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -114,6 +140,20 @@ ALTER TABLE `restaurants`
   ADD KEY `picture_id` (`picture_id`);
 
 --
+-- Indexes for table `restaurants_comments`
+--
+ALTER TABLE `restaurants_comments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `restaurants_photos`
+--
+ALTER TABLE `restaurants_photos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `restaurant_id` (`restaurant_id`),
+  ADD KEY `photo_id` (`photo_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -147,6 +187,13 @@ ALTER TABLE `users`
 --
 ALTER TABLE `restaurants`
   ADD CONSTRAINT `picture_id` FOREIGN KEY (`picture_id`) REFERENCES `photos` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `restaurants_photos`
+--
+ALTER TABLE `restaurants_photos`
+  ADD CONSTRAINT `photo_id` FOREIGN KEY (`photo_id`) REFERENCES `photos` (`id`),
+  ADD CONSTRAINT `restaurant_id` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`);
 
 --
 -- Constraints for table `users`
