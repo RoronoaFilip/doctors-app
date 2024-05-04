@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2024 at 10:02 AM
+-- Generation Time: May 04, 2024 at 03:59 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -46,59 +46,6 @@ INSERT INTO `photos` (`id`, `photo_url`, `alt`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `restaurants`
---
-
-CREATE TABLE `restaurants` (
-  `id` bigint(20) NOT NULL COMMENT 'restaurant''s id',
-  `name` varchar(50) NOT NULL COMMENT 'restaurant''s name',
-  `location` varchar(100) NOT NULL COMMENT 'restaurant''s location',
-  `capacity` bigint(20) NOT NULL COMMENT 'restaurant''s capacity',
-  `rating` float NOT NULL COMMENT 'restaurant''s raiting',
-  `phone` varchar(50) NOT NULL,
-  `picture_id` bigint(60) DEFAULT 1 COMMENT 'Foreign key to pictures',
-  `email` varchar(50) NOT NULL COMMENT 'Restaurant''s email',
-  `description` varchar(200) NOT NULL COMMENT 'Restaurant''s description'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `restaurants`
---
-
-INSERT INTO `restaurants` (`id`, `name`, `location`, `capacity`, `rating`, `phone`, `picture_id`, `email`, `description`) VALUES
-(1, 'Грог', 'ж.к. Петко Р. Славейков, ж.к. Славейков 135, 8005 Бургас', 60, 4.4, '0876332988', 1, 'grog@abv.bg', 'суши бар, заведение с доставка, live music, вино бар, бистро, bar & dinner, кафе, винарна, бирария, бързо хранене, сладкарница, пицария, бар, ресторант'),
-(2, 'Romance Pizza', 'Парк Славейков до бл. 62, 8000 Бургас', 80, 4.5, '070020011', 1, 'romance@abv.bg', 'ПРЕЗ 2005 ПИЦАТА СТАНА ПО-ДОБРА.\r\n\r\nС ПО-ДОБРА, РАЗТОЧЕНА НА РЪКА, ТЪНКА И ХРУПКАВА ОСНОВА ОТ АВТЕНТИЧНО ИТАЛИАНСКО БРАШНО И СТУДЕНО ПРЕСОВАН ЗЕХТИН.\r\n\r\nПО-ДОБРА, 100% НАТУРАЛНА ДОМАТЕНА ПАСТА, ПРЕСНИ'),
-(3, ' Петте кьошета 3', 'Варна ЦентърОдесос, ул. „Македония“ 44, 9002 Варна', 50, 4.4, '0879313176', 1, 'pettekusheta@abv.bg', 'Открийте перфектната хапка удоволствие в центъра на град Варна. Вече не е необходимо да отскачате до миналото, за да се насладите на традиционната българска кухня.'),
-(4, 'Ресторант Санторини', 'Варна ЦентърПриморски, бул. „Цар Освободител“ 76г, 9000 Варна', 40, 4, '0898728807', 1, 'santorini_restaurant@abv.bg', 'Най-прекрасното BBQ в града!');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `restaurants_comments`
---
-
-CREATE TABLE `restaurants_comments` (
-  `id` bigint(20) NOT NULL,
-  `comment` varchar(200) NOT NULL COMMENT 'Comment on restaurant',
-  `restaurant_id` bigint(20) NOT NULL COMMENT 'Foreign key to restaurant',
-  `user_id` bigint(20) NOT NULL COMMENT 'Foreign key to user'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `restaurants_photos`
---
-
-CREATE TABLE `restaurants_photos` (
-  `id` bigint(20) NOT NULL,
-  `restaurant_id` bigint(20) NOT NULL COMMENT 'Foreign key to restaurant',
-  `photo_id` bigint(20) NOT NULL COMMENT 'Foreign key to photo'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
@@ -106,6 +53,7 @@ CREATE TABLE `users` (
   `id` bigint(20) NOT NULL COMMENT 'primary key',
   `first_name` varchar(50) NOT NULL COMMENT 'the user''s first name',
   `last_name` varchar(50) NOT NULL COMMENT 'the user''s last name',
+  `user_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'USER' COMMENT 'foreign key to user''s type',
   `email` varchar(50) NOT NULL COMMENT 'the user''s email',
   `password` varchar(300) NOT NULL COMMENT 'the user''s password',
   `phone` varchar(50) DEFAULT NULL COMMENT 'the user''s phone',
@@ -116,10 +64,30 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `phone`, `profile_picture_id`) VALUES
-(1, 'Filip', 'Filchev', 'filip@email.com', '$2y$10$QdXJrjhm0UAqE9rA36x1H.D31w5tqR7y4kK7ra5nTJkq5azE9wHNa', NULL, 21),
-(2, 'admin', 'adminov', 'admin@admin.admin', '$2y$10$Ac6yjsOXdq8tIrHwfFCNdeDJpofDQGU4zlhTdRjXAbhBTT7R8gg0e', NULL, 22),
-(10, 'Test', 'Testov', 'test@test.com', '$2y$10$t/MqRWX69mC98Nmwp3TQWebnKPK5mN1DjH2pW8BO/7/m60m.yq2pq', NULL, 20);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `user_type`, `email`, `password`, `phone`, `profile_picture_id`) VALUES
+(1, 'Filip', 'Filchev', 'ADMIN', 'filip@email.com', '$2y$10$QdXJrjhm0UAqE9rA36x1H.D31w5tqR7y4kK7ra5nTJkq5azE9wHNa', NULL, 21),
+(2, 'admin', 'adminov', 'ADMIN', 'admin@admin.admin', '$2y$10$Ac6yjsOXdq8tIrHwfFCNdeDJpofDQGU4zlhTdRjXAbhBTT7R8gg0e', NULL, 22),
+(11, 'doctor', 'doctorov', 'DOCTOR', 'doctor@doctor.com', '$2y$10$lviQpfPc/wE4fgyeQbssfOFw6HcYeFukT/nBLRxESO6U3fCdcKQ2C', NULL, 1),
+(12, 'user', 'userov', 'USER', 'user@user.com', '$2y$10$td/LB4feU39ntij6VOlVxuj2qghsVUlSkgXIvCw8.uoap32LxSuYm', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_types`
+--
+
+CREATE TABLE `user_types` (
+  `type` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_types`
+--
+
+INSERT INTO `user_types` (`type`) VALUES
+('ADMIN'),
+('DOCTOR'),
+('USER');
 
 --
 -- Indexes for dumped tables
@@ -132,35 +100,20 @@ ALTER TABLE `photos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `restaurants`
---
-ALTER TABLE `restaurants`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQUE` (`name`,`email`) USING BTREE,
-  ADD KEY `picture_id` (`picture_id`);
-
---
--- Indexes for table `restaurants_comments`
---
-ALTER TABLE `restaurants_comments`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `restaurants_photos`
---
-ALTER TABLE `restaurants_photos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `restaurant_id` (`restaurant_id`),
-  ADD KEY `photo_id` (`photo_id`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`(30)),
   ADD UNIQUE KEY `phone` (`phone`(30)),
-  ADD KEY `profile_picture_fk` (`profile_picture_id`);
+  ADD KEY `profile_picture_fk` (`profile_picture_id`),
+  ADD KEY `user_type_fk` (`user_type`);
+
+--
+-- Indexes for table `user_types`
+--
+ALTER TABLE `user_types`
+  ADD PRIMARY KEY (`type`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -176,30 +129,18 @@ ALTER TABLE `photos`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'primary key', AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'primary key', AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `restaurants`
---
-ALTER TABLE `restaurants`
-  ADD CONSTRAINT `picture_id` FOREIGN KEY (`picture_id`) REFERENCES `photos` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION;
-
---
--- Constraints for table `restaurants_photos`
---
-ALTER TABLE `restaurants_photos`
-  ADD CONSTRAINT `photo_id` FOREIGN KEY (`photo_id`) REFERENCES `photos` (`id`),
-  ADD CONSTRAINT `restaurant_id` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`);
-
---
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `profile_pic_fk` FOREIGN KEY (`profile_picture_id`) REFERENCES `photos` (`id`);
+  ADD CONSTRAINT `profile_pic_fk` FOREIGN KEY (`profile_picture_id`) REFERENCES `photos` (`id`),
+  ADD CONSTRAINT `user_type_fk` FOREIGN KEY (`user_type`) REFERENCES `user_types` (`type`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

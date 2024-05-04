@@ -35,7 +35,7 @@
         <label for="confirmPassword" class="form-label">Потвърди парола</label>
         <input type="password" min="6" class="form-control" id="confirmPassword" name="confirmPassword">
     </div>
-    <button type="submit" class="btn primary-btn align-center mt-4">Регистраране</button>
+    <button type="submit" class="btn primary-btn align-center mt-4">Регистриране</button>
 </form>
 </body>
 </html>
