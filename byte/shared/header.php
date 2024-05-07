@@ -5,13 +5,19 @@
     }
     if (key_exists('loginTime', $_SESSION)) {
       $email = $_SESSION['email'];
-      $fullName = $_SESSION['firstName'] . " " . $_SESSION['lastName'];
+      $fullName = '';
+      if ($_SESSION['firstName'] && $_SESSION['lastName']) {
+        $fullName = $_SESSION['firstName'] . ' ' . $_SESSION['lastName'];
+      } else {
+        $fullName = $email;
+      }
+
       $items = <<<EOT
                         <div class="nav-item">Hello, $fullName</div>
                         <div class="nav-item">
-                            <a class="nav-link" href="/byte/restaurants.php">Restaurants</a>
+                            <a class="nav-link" href="/byte/doctors.php">Доктори</a>
                         </div>
-                        <div class="nav-item"><a class="nav-link" href="/byte/profile.php">Profile</a></div>
+                        <div class="nav-item"><a class="nav-link" href="/byte/profile.php">Профил</a></div>
                         <div class="nav-item">
                             <a class="nav-link" href="/byte/logout.php">Изход</a>
                         </div>

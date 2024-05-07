@@ -2,7 +2,9 @@
 
 
   require_once __DIR__ . '/../database/repositories/UsersRepository.php';
+  require_once __DIR__ . '/../database/repositories/DoctorInfoRepository.php';
 
+  use repositories\DoctorInfoRepository;
   use repositories\UsersRepository;
 
   session_start();
@@ -31,6 +33,14 @@
     $_SESSION['lastName'] = $user->lastName;
     $_SESSION['profilePictureUrl'] = $user->profilePicture->url ?? '';
     $_SESSION['loginTime'] = time();
+
+    if ($user->userType === 'DOCTOR') {
+      $doctorRepository = new DoctorInfoRepository();
+      $doctor = $doctorRepository->getByUser($user);
+      $_SESSION['specialty'] = $doctor->specialty;
+      $_SESSION['education'] = $doctor->education;
+    }
+
     header('Location: /byte/main.php');
   } else {
     echo "Невалидни потребителско име или парола.";
