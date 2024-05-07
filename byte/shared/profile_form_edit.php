@@ -27,17 +27,17 @@ EOT;
             </form>
         </section>
         <section class="edit-section info">
-            <form action="save_profile.php" method="post" class="profile-edit-form">
+            <form action="/handlers/save_profile.php" method="post" class="profile-edit-form">
                 <h3>Edit Profile</h3>
                 
                 <div class="input-field">
                     <label for="firstName">First Name</label>
-                    <input type="text" id="firstName" placeholder="First Name" name="name" value="$firstName" required>
+                    <input type="text" id="firstName" placeholder="First Name" name="firstName" value="$firstName">
                 </div>      
     
                 <div class="input-field">
                     <label for="lastName">Last Name</label>
-                    <input type="text" id="lastName" placeholder="Last Name" name="lastName" value="$lastName" required>
+                    <input type="text" id="surname" placeholder="Last Name" name="lastName" value="$lastName">
                 </div>
                 
                 <div class="input-field">

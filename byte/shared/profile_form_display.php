@@ -1,5 +1,11 @@
 <?php
-  $fullName = $_SESSION['firstName'] . ' ' . $_SESSION['lastName'];
+  $fullName = '';
+  if ($_SESSION['firstName'] && $_SESSION['lastName']) {
+    $fullName = $_SESSION['firstName'] . ' ' . $_SESSION['lastName'];
+  } else {
+    $fullName = 'No Name Specified';
+  }
+
   $email = $_SESSION['email'];
   $phone = $_SESSION['phone'];
   if ($phone === '') {
