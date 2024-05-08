@@ -3,12 +3,23 @@
 <head>
     <title>Профил</title>
     <link rel="stylesheet" href="/public/styles/profile.css">
-    <link rel="stylesheet" href="/public/styles/profile-display.css">
-    <link rel="stylesheet" href="/public/styles/profile-edit.css">
     <script src="/public/js/profile.js" defer></script>
   <?php
     require_once 'shared/head.php';
     include 'shared/session.php';
+
+    $userType = $_SESSION['userType'];
+
+    if (isset($_GET['edit'])) {
+      echo '<link rel="stylesheet" href="/public/styles/profile-edit.css">';
+      echo '<link rel="stylesheet" href="/public/styles/forms.css">';
+    } else {
+      echo '<link rel="stylesheet" href="/public/styles/profile-display.css">';
+    }
+
+    if ($userType === 'DOCTOR' && isset($_GET['edit'])) {
+      echo '<script src="/public/js/profile_edit.js" defer></script>';
+    }
   ?>
 </head>
 <body>

@@ -25,7 +25,8 @@
           "email" => $user->email,
           "first_name" => $user->firstName,
           "last_name" => $user->lastName,
-          "password" => $user->password
+          "password" => $user->password,
+          "user_type" => $user->userType
       ]);
 
       if (!$result) {

@@ -13,6 +13,11 @@
   }
   $profilePictureUrl = $_SESSION['profilePictureUrl'];
 
+  $specialty = $_SESSION['specialty'] ?? '';
+  $education = $_SESSION['education'] ?? '';
+
+  $userType = $_SESSION['userType'];
+
   $editButton = <<<EOT
 <button id="profileEditButton" type="button" class="edit-button">
 <svg height="1em" viewBox="0 0 512 512">
@@ -33,11 +38,22 @@ EOT;
             <li><strong>Name:</strong> $fullName</li>
             <li><strong>Email:</strong> $email</li>
             <li><strong>Phone:</strong> $phone</li>
+EOT;
+
+  if ($userType === 'DOCTOR') {
+    $items .= <<<EOT
+            <li><strong>Specialty:</strong> $specialty</li>
+            <li><strong>Education:</strong> $education</li>
+EOT;
+  }
+
+  $items .= <<<EOT
             $editButton
         </ul>
     </section>
 </section>
 EOT;
+
 
   echo $items;
 

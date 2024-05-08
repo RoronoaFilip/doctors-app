@@ -32,13 +32,14 @@
     $_SESSION['phone'] = $user->phone;
     $_SESSION['lastName'] = $user->lastName;
     $_SESSION['profilePictureUrl'] = $user->profilePicture->url ?? '';
+    $_SESSION['userType'] = $user->userType;
     $_SESSION['loginTime'] = time();
 
     if ($user->userType === 'DOCTOR') {
       $doctorRepository = new DoctorInfoRepository();
-      $doctor = $doctorRepository->getByUser($user);
-      $_SESSION['specialty'] = $doctor->specialty;
-      $_SESSION['education'] = $doctor->education;
+      $doctorInfo = $doctorRepository->getByUser($user);
+      $_SESSION['specialty'] = $doctorInfo->specialty;
+      $_SESSION['education'] = $doctorInfo->education;
     }
 
     header('Location: /byte/main.php');
