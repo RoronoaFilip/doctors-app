@@ -3,6 +3,7 @@
   require_once __DIR__ . '/../database/repositories/UsersRepository.php';
   require_once __DIR__ . '/../database/repositories/DoctorInfoRepository.php';
 
+  use models\DoctorInfo;
   use models\User;
   use repositories\DoctorInfoRepository;
   use repositories\UsersRepository;
@@ -13,6 +14,8 @@
   $password = $_POST['password'];
   $confirmPassword = $_POST['confirmPassword'];
   $userType = $_POST['userType'];
+  $specialty = $_POST['specialty'] ?? null;
+  $education = $_POST['education'] ?? null;
 
   if (empty($email) || empty($password) || empty($confirmPassword || empty($userType)
           || ($userType === 'DOCTOR' && (empty($firstName) || empty($lastName))))) {
@@ -27,14 +30,23 @@
 
   $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-  $userService = new UsersRepository();
+  $userRepository = new UsersRepository();
+  $doctorRepository = new DoctorInfoRepository();
 
-  if ($userService->getByEmail($email)) {
-    echo "Потребител с това потребителско име вече съществуава. Моля избере друго потребителско име.";
+  if ($userRepository->getByEmail($email)) {
+    // TODO: move these echos (in login also) to the form and display them there
+    echo "Потребител с този имейл вече съществуава. Моля избере друго потребителско име.";
     exit();
   }
 
-  $createdUser = $userService->create(new User($firstName, $lastName, $email, $hashedPassword, $userType));
+  $newUser = new User($firstName, $lastName, $email, $hashedPassword, $userType);
+  $createdUser = $userRepository->create($newUser);
+
+  if ($userType === 'DOCTOR') {
+    $newUser = new DoctorInfo($createdUser->id, $specialty, $education);
+    $createdDoctorInfo = $doctorRepository->create($newUser);
+  }
+
   if (!$createdUser) {
     echo "Грешка по време на регистрацията.";
     exit();
@@ -50,12 +62,9 @@
   $_SESSION['profilePictureUrl'] = $createdUser->profilePicture->url;
   $_SESSION['phone'] = $createdUser->phone ?? '';
   $_SESSION['loginTime'] = time();
-
-  if ($createdUser->userType === 'DOCTOR') {
-    $doctorRepository = new DoctorInfoRepository();
-    $doctor = $doctorRepository->getByUser($createdUser);
-    $_SESSION['specialty'] = $doctor->specialty;
-    $_SESSION['education'] = $doctor->education;
+  if ($userType === 'DOCTOR') {
+    $_SESSION['specialty'] = $createdDoctorInfo->specialty;
+    $_SESSION['education'] = $createdDoctorInfo->education;
   }
 
   header('Location: /byte/main.php');

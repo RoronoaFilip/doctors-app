@@ -5,6 +5,7 @@
   <?php
     require_once 'shared/head.php'
   ?>
+    <link rel="stylesheet" href="/public/styles/forms.css">
     <script defer src="/public/js/register.js"></script>
 </head>
 <body>
@@ -13,38 +14,46 @@
   require_once 'shared/header.php'
 ?>
 
-<h1 class="page-title mt-4">Регистрация</h1>
 
-<form class="auth-form" method="post" action="/handlers/register.php">
-    <div class="mb-3">
+<form class="form" method="post" action="/handlers/register.php">
+    <h1 class="page-title">Регистрация</h1>
+    <fieldset class="input-wrapper">
         <label for="firstName" class="form-label">Име</label>
         <input type="text" min="3" max="50" class="form-control" id="firstName" name="firstName">
-    </div>
-    <div class="mb-3">
+    </fieldset>
+    <fieldset class="input-wrapper">
         <label for="lastName" class="form-label">Фамилия</label>
         <input type="text" min="3" max="50" class="form-control" id="lastName" name="lastName">
-    </div>
-    <div class="mb-3">
+    </fieldset>
+    <fieldset class="input-wrapper">
         <label for="email" class="form-label">Електронна поща</label>
         <input type="email" class="form-control" id="email" name="email">
-    </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Парола</label>
-        <input type="password" min="6" class="form-control" id="password" name="password">
-    </div>
-    <div class="mb-3">
-        <label for="confirmPassword" class="form-label">Потвърди парола</label>
-        <input type="password" min="6" class="form-control" id="confirmPassword" name="confirmPassword">
-    </div>
-    <div>
+    </fieldset>
+    <fieldset class="input-wrapper">
         <label for="userType" class="form-label">Тип на потребителя</label>
         <select class="form-select" id="userType" name="userType">
             <option value="USER" selected>Потребител</option>
             <option value="DOCTOR">Лекар</option>
             <option value="ADMIN">Администратор</option>
         </select>
-    </div>
-    <button type="submit" class="btn primary-btn align-center mt-4">Регистриране</button>
+    </fieldset>
+    <fieldset class="input-wrapper">
+        <label for="specialty" class="form-label">Специалност</label>
+        <input type="text" class="form-control" id="specialty" name="specialty">
+    </fieldset>
+    <fieldset class="input-wrapper">
+        <label for="education" class="form-label">Образование</label>
+        <input type="text" class="form-control" id="education" name="education">
+    </fieldset>
+    <fieldset class="input-wrapper">
+        <label for="password" class="form-label">Парола</label>
+        <input type="password" min="6" class="form-control" id="password" name="password">
+    </fieldset>
+    <fieldset class="input-wrapper">
+        <label for="confirmPassword" class="form-label">Потвърди парола</label>
+        <input type="password" min="6" class="form-control" id="confirmPassword" name="confirmPassword">
+    </fieldset>
+    <button type="submit" class="submit-button">Регистриране</button>
 </form>
 </body>
 </html>

@@ -2,14 +2,14 @@
 
   namespace repositories;
 
-  use models\Doctor;
+  use models\DoctorInfo;
   use models\User;
 
   require_once __DIR__ . '/Repository.php';
   require_once __DIR__ . '/PhotoRepository.php';
   require_once __DIR__ . '/UsersRepository.php';
   require_once __DIR__ . '/../../models/User.php';
-  require_once __DIR__ . '/../../models/Doctor.php';
+  require_once __DIR__ . '/../../models/DoctorInfo.php';
 
   class DoctorInfoRepository extends Repository
   {
@@ -21,48 +21,38 @@
       $this->usersRepository = new UsersRepository();
     }
 
-    public function getByUserId($id): ?Doctor
+    public function create(DoctorInfo $doctorInfo): ?DoctorInfo
     {
-      $user = $this->usersRepository->getById($id);
-      if (!$user) {
-        return null;
-      }
-
-      $doctorInfo = $this->select([
-          'user_id' => $id
+      $this->insert([
+          'id' => $doctorInfo->id,
+          'specialty' => $doctorInfo->specialty,
+          'education' => $doctorInfo->education
       ]);
 
-      return $this->constructDoctor($user, $doctorInfo[0]);
+      return $doctorInfo;
     }
 
-    private function constructDoctor(User $user, $doctorInfo): Doctor
-    {
-      $doctor = new Doctor(
-          $user->firstName,
-          $user->lastName,
-          $user->email,
-          $user->password,
-          $doctorInfo['user_id'],
-          $doctorInfo['specialty'],
-          $doctorInfo['education']
-      );
-      $doctor->id = $user->id;
-      $doctor->phone = $user->phone;
-      $doctor->profilePicture = $user->profilePicture;
-      return $doctor;
-    }
-
-    public function getByUser(User $user): ?Doctor
+    public function getByUser(User $user): ?DoctorInfo
     {
       if ($user->userType !== 'DOCTOR') {
         return null;
       }
 
       $doctorInfo = $this->select([
-          'user_id' => $user->id
+          'id' => $user->id
       ]);
 
-      return $this->constructDoctor($user, $doctorInfo[0]);
+      return $this->constructDoctor($user->id, $doctorInfo[0]);
+    }
+
+    private function constructDoctor(int $userId, $doctorInfo): DoctorInfo
+    {
+      $doctor = new DoctorInfo(
+          $doctorInfo['specialty'],
+          $doctorInfo['education']
+      );
+      $doctor->id = $userId;
+      return $doctor;
     }
 
     public function getAll(): array
@@ -71,10 +61,24 @@
 
       $doctors = [];
       foreach ($foundDoctors as $foundDoctor) {
-        $user = $this->usersRepository->getById($foundDoctor['user_id']);
-        $doctors[] = $this->constructDoctor($user, $foundDoctor);
+        $user = $this->usersRepository->getById($foundDoctor['id']);
+        $doctors[] = $this->constructDoctor($user->id, $foundDoctor);
       }
 
       return $doctors;
+    }
+
+    public function getById($id): ?DoctorInfo
+    {
+      $user = $this->usersRepository->getById($id);
+      if (!$user) {
+        return null;
+      }
+
+      $doctorInfo = $this->select([
+          'id' => $id
+      ]);
+
+      return $this->constructDoctor($user->id, $doctorInfo[0]);
     }
   }
