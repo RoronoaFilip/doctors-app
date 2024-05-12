@@ -81,15 +81,9 @@
 }
 
 .profile-picture {
-    max-width: 20%;
+    max-width: 32%;
     margin-right: 20px;
     border: 2px solid #ddd;
-
-    &.edit {
-        max-width: 40%;
-
-        align-self: center;
-    }
 }
 
 .profile-info {

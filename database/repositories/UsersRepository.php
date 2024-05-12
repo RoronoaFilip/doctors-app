@@ -1,5 +1,6 @@
 <?php
 
+
   namespace repositories;
 
   use models\User;
@@ -24,7 +25,8 @@
           "email" => $user->email,
           "first_name" => $user->firstName,
           "last_name" => $user->lastName,
-          "password" => $user->password
+          "password" => $user->password,
+          "user_type" => $user->userType
       ]);
 
       if (!$result) {
@@ -54,6 +56,7 @@
           $foundUser['last_name'],
           $foundUser['email'],
           $foundUser['password'],
+          $foundUser['user_type']
       );
       $user->id = $foundUser['id'] ?? null;
       $user->phone = $foundUser['phone'] ?? '';

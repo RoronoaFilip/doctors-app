@@ -1,11 +1,22 @@
 <?php
-  $fullName = $_SESSION['firstName'] . ' ' . $_SESSION['lastName'];
+  $fullName = '';
+  if ($_SESSION['firstName'] && $_SESSION['lastName']) {
+    $fullName = $_SESSION['firstName'] . ' ' . $_SESSION['lastName'];
+  } else {
+    $fullName = 'No Name Specified';
+  }
+
   $email = $_SESSION['email'];
   $phone = $_SESSION['phone'];
   if ($phone === '') {
     $phone = 'No Phone Specified';
   }
   $profilePictureUrl = $_SESSION['profilePictureUrl'];
+
+  $specialty = $_SESSION['specialty'] ?? '';
+  $education = $_SESSION['education'] ?? '';
+
+  $userType = $_SESSION['userType'];
 
   $editButton = <<<EOT
 <button id="profileEditButton" type="button" class="edit-button">
@@ -27,11 +38,22 @@ EOT;
             <li><strong>Name:</strong> $fullName</li>
             <li><strong>Email:</strong> $email</li>
             <li><strong>Phone:</strong> $phone</li>
+EOT;
+
+  if ($userType === 'DOCTOR') {
+    $items .= <<<EOT
+            <li><strong>Specialty:</strong> $specialty</li>
+            <li><strong>Education:</strong> $education</li>
+EOT;
+  }
+
+  $items .= <<<EOT
             $editButton
         </ul>
     </section>
 </section>
 EOT;
+
 
   echo $items;
 

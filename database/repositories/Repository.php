@@ -70,8 +70,6 @@
 
       $query->bindValue($index, $id);
 
-      echo $id;
-      echo $data['profile_picture_id'];
       return $query->execute();
     }
 

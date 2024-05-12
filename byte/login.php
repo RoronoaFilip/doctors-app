@@ -5,6 +5,7 @@
   <?php
     require_once 'shared/head.php'
   ?>
+    <link rel="stylesheet" href="/public/styles/forms.css">
 </head>
 <body>
 
@@ -12,18 +13,18 @@
   require_once 'shared/header.php'
 ?>
 
-<h1 class="page-title">Вход</h1>
 
-<form class="auth-form" action="/handlers/login.php" method="post">
-    <div class="mb-3">
+<form class="form" action="/handlers/login.php" method="post">
+    <h1 class="page-title">Вход</h1>
+    <fieldset class="input-wrapper">
         <label for="email" class="form-label">Електронна поща</label>
         <input type="email" class="form-control" id="email" name="email">
-    </div>
-    <div class="mb-3">
+    </fieldset>
+    <fieldset class="input-wrapper">
         <label for="password" class="form-label">Парола</label>
         <input type="password" class="form-control" id="password" name="password">
-    </div>
-    <button type="submit" class="btn primary-btn align-center mt-4">Вход</button>
+    </fieldset>
+    <button type="submit" class="submit-button">Вход</button>
 </form>
 </body>
 </html>
