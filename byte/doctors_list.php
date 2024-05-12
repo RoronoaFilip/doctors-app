@@ -1,11 +1,11 @@
 <?php
-  require_once __DIR__ . '/../database/repositories/DoctorInfoRepository.php';
+  require_once __DIR__ . '/../database/repositories/DoctorRepository.php';
 
-  use repositories\DoctorInfoRepository;
+  use repositories\DoctorRepository;
 
-  $doctorRepository = new DoctorInfoRepository();
+  $doctorRepository = new DoctorRepository();
 
-  $doctors = $doctorRepository->getAll();
+  $doctors = $doctorRepository->getAllDoctors();
 
   $items = '';
   foreach ($doctors as $doctor) {
