@@ -6,7 +6,6 @@
   use models\User;
 
   require_once __DIR__ . '/Repository.php';
-  require_once __DIR__ . '/PhotoRepository.php';
   require_once __DIR__ . '/UsersRepository.php';
   require_once __DIR__ . '/../../models/User.php';
   require_once __DIR__ . '/../../models/DoctorInfo.php';
@@ -42,17 +41,16 @@
           'id' => $user->id
       ]);
 
-      return $this->constructDoctor($user->id, $doctorInfo[0]);
+      return $this->constructDoctorInfo($user->id, $doctorInfo[0]);
     }
 
-    private function constructDoctor(int $userId, $doctorInfo): DoctorInfo
+    private function constructDoctorInfo(int $userId, $doctorInfo): DoctorInfo
     {
-      $doctor = new DoctorInfo(
+      return new DoctorInfo(
+          $userId,
           $doctorInfo['specialty'],
           $doctorInfo['education']
       );
-      $doctor->id = $userId;
-      return $doctor;
     }
 
     public function getAll(): array
@@ -62,7 +60,7 @@
       $doctors = [];
       foreach ($foundDoctors as $foundDoctor) {
         $user = $this->usersRepository->getById($foundDoctor['id']);
-        $doctors[] = $this->constructDoctor($user->id, $foundDoctor);
+        $doctors[] = $this->constructDoctorInfo($user->id, $foundDoctor);
       }
 
       return $doctors;
@@ -79,6 +77,6 @@
           'id' => $id
       ]);
 
-      return $this->constructDoctor($user->id, $doctorInfo[0]);
+      return $this->constructDoctorInfo($user->id, $doctorInfo[0]);
     }
   }
