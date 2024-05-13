@@ -101,4 +101,18 @@
 
       return $this->constructUser($users[0]);
     }
+
+    public function getAllDoctors(): array
+    {
+      $doctors = $this->select([
+          'user_type' => 'DOCTOR'
+      ]);
+
+      $users = [];
+      foreach ($doctors as $doctor) {
+        $users[] = $this->constructUser($doctor);
+      }
+
+      return $users;
+    }
   }
