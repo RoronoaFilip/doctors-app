@@ -54,7 +54,7 @@
         return null;
       }
 
-      $doctorInfo = $this->doctorInfoRepository->getById($user);
+      $doctorInfo = $this->doctorInfoRepository->getById($id);
       if (!$doctorInfo) {
         return null;
       }

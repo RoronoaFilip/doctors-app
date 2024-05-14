@@ -8,6 +8,7 @@
   require_once __DIR__ . '/Repository.php';
   require_once __DIR__ . '/UsersRepository.php';
   require_once __DIR__ . '/DoctorRepository.php';
+  require_once __DIR__ . '/../../models/Appointment.php';
 
   class AppointmentRepository extends Repository
   {
@@ -50,18 +51,16 @@
       $usersRepository = new UsersRepository();
       $user = $usersRepository->getById($foundAppointment['user_id']);
 
-      $appointment = new Appointment(
+      return new Appointment(
           $foundAppointment['id'],
           $doctor,
           $user,
           new DateTime($foundAppointment['date']),
           $foundAppointment['comment']
       );
-
-      return $appointment;
     }
 
-    public function getAllByDoctorId($doctorId): array
+    public function getByDoctorId($doctorId): array
     {
       $appointments = $this->select([
           'doctor_id' => $doctorId
@@ -75,7 +74,7 @@
       return $appointmentsList;
     }
 
-    public function getAllByUserId($userId): array
+    public function getByUserId($userId): array
     {
       $appointments = $this->select([
           'user_id' => $userId
