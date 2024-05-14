@@ -46,4 +46,27 @@
 
       return $doctors;
     }
+
+    public function getById($id): ?Doctor
+    {
+      $user = $this->usersRepository->getById($id);
+      if (!$user || $user->userType !== 'DOCTOR') {
+        return null;
+      }
+
+      $doctorInfo = $this->doctorInfoRepository->getById($user);
+      if (!$doctorInfo) {
+        return null;
+      }
+
+      return new Doctor(
+          $user->id,
+          $user->firstName,
+          $user->lastName,
+          $user->email,
+          $user->profilePicture,
+          $doctorInfo->specialty,
+          $doctorInfo->education
+      );
+    }
   }
