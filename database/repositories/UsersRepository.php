@@ -115,4 +115,18 @@
 
       return $users;
     }
+
+    public function getDoctorById($id): ?User 
+    {
+      $users = $this->select([
+        "user_type" => 'DOCTOR',
+        "id" => $id
+      ]);
+      
+      if(!$users) {
+        return null;
+      }
+
+      return $this->constructUser($users[0]);
+    }
   }

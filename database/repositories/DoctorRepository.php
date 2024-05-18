@@ -46,4 +46,50 @@
 
       return $doctors;
     }
+
+    public function getDoctorByName($name): array
+    {
+        $users = $this->usersRepository->getAllDoctors();
+        $doctorsInfo = $this->doctorInfoRepository->getAll();
+
+        $doctors = [];
+        foreach ($users as $user) {
+          $doctorInfo = array_filter($doctorsInfo, fn($doctorInfo) => $doctorInfo->id === $user->id)[0] ?? null;
+          if (!$doctorInfo) {
+            continue;
+          }
+  
+          if($user->firstName === $name || $user->secondName === $name) {
+            $doctors[] = new Doctor(
+            $user->id,
+            $user->firstName,
+            $user->lastName,
+            $user->email,
+            $user->profilePicture,
+            $doctorInfo->specialty,
+            $doctorInfo->education
+          );
+          }
+        }
+  
+        return $doctors;
+    }
+
+    public function getCurrentDoctor($id): ?Doctor
+    {
+      $user = $this->usersRepository->getDoctorById($id);
+      $doctorInfo = $this->doctorInfoRepository->getById($id);
+
+      $doctor = new Doctor(
+        $user->id,
+        $user->firstName,
+        $user->lastName,
+        $user->email,
+        $user->profilePicture,
+        $doctorInfo->specialty,
+        $doctorInfo->education
+      );
+
+      return $doctor;
+    }
   }
