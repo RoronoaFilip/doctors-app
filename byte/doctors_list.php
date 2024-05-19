@@ -20,6 +20,4 @@
     $items .= '</div>';
   }
 
-  echo '<section class="list">';
   echo $items;
-  echo '</section>';
