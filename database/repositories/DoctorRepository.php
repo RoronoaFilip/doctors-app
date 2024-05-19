@@ -28,7 +28,8 @@
 
       $doctors = [];
       foreach ($users as $user) {
-        $doctorInfo = array_filter($doctorsInfo, fn($doctorInfo) => $doctorInfo->id === $user->id)[0] ?? null;
+        $filteredArray = array_filter($doctorsInfo, fn($doctorInfo) => $doctorInfo->id === $user->id);
+        $doctorInfo = array_shift($filteredArray) ?? null;
         if (!$doctorInfo) {
           continue;
         }
