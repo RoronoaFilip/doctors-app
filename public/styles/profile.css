@@ -6,7 +6,8 @@ body {
     gap: 10px;
 }
 
-.profile {
+.profile,
+.appointments {
     display: flex;
     flex-direction: column;
     justify-content: center;
