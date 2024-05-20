@@ -79,4 +79,18 @@
 
       return $this->constructDoctorInfo($user->id, $doctorInfo[0]);
     }
+
+    public function searchBySpecialty($specialty): array
+    {
+      $foundDoctors = $this->search([
+          'specialty' => $specialty
+      ]);
+
+      $doctorInfos = [];
+      foreach ($foundDoctors as $doctorInfo) {
+        $doctorInfos[] = $this->constructDoctorInfo($doctorInfo['id'], $doctorInfo);
+      }
+      
+      return $doctorInfos;
+    }
   }

@@ -94,6 +94,27 @@
       return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function search($data, $operator = "AND"): array
+    {
+      $columns = array_keys($data);
+      $placeholders = array_map(function ($value) {
+        return "$value LIKE ?";
+      }, $columns);
+
+      $valuesPlaceholders = implode($operator, $placeholders);
+
+      $command = "SELECT * FROM $this->tableName WHERE $valuesPlaceholders";
+      $query = $this->database->getConnection()->prepare($command);
+
+      $index = 1;
+      foreach ($data as $key => $value) {
+        $query->bindValue($index++, "%$value%");
+      }
+
+      $query->execute();
+      return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getLastInsertId(): int
     {
       return $this->database->getConnection()->lastInsertId();
