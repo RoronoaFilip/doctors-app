@@ -34,9 +34,11 @@
       foreach ($users as $user) {
         if($user->id === $currentUserId) {
           continue;
-        }
+        } 
+        
+        $filteredArray = array_filter($doctorsInfo, fn($doctorInfo) => $doctorInfo->id === $user->id);
+        $doctorInfo = array_shift($filteredArray) ?? null;
 
-        $doctorInfo = array_filter($doctorsInfo, fn($doctorInfo) => $doctorInfo->id === $user->id)[0] ?? null;
         if (!$doctorInfo) {
           continue;
         }
