@@ -54,6 +54,18 @@ EOT;
 </section>
 EOT;
 
+/*
+  button to see all questions that have been asked
+  for the current doctor but still doesn't have
+  an answer
+*/
+  if($userType === 'DOCTOR') {
+    $items .= <<<EOT
+          <button type="button" onclick="location.href='/byte/answer_questions.php'">Отговори на въпроси</button>
+EOT;
+  }
+
+
 
   echo $items;
 

@@ -1,11 +1,4 @@
 <?php
-  require_once __DIR__ . '/../database/repositories/DoctorRepository.php';
-
-  use repositories\DoctorRepository;
-
-  $doctorRepository = new DoctorRepository();
-
-  $doctors = $doctorRepository->getAllDoctors();
 
   $items = '';
   foreach ($doctors as $doctor) {
@@ -23,3 +16,4 @@
   echo '<section class="list">';
   echo $items;
   echo '</section>';
+?>

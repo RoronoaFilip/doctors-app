@@ -101,7 +101,7 @@
 
       return $this->constructUser($users[0]);
     }
-
+    
     public function getAllDoctors(): array
     {
       $doctors = $this->select([
@@ -114,5 +114,19 @@
       }
 
       return $users;
+    }
+
+    public function getDoctorById($id): ?User 
+    {
+      $users = $this->select([
+        "user_type" => 'DOCTOR',
+        "id" => $id
+      ]);
+      
+      if(!$users) {
+        return null;
+      }
+
+      return $this->constructUser($users[0]);
     }
   }
