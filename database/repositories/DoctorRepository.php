@@ -21,70 +21,6 @@
       $this->doctorInfoRepository = new DoctorInfoRepository();
     }
 
-    public function searchByName($name): array
-    {
-      $users = $this->usersRepository->getAllDoctors();
-      $doctorsInfo = $this->doctorInfoRepository->getAll();
-
-      $doctors = [];
-      foreach ($users as $user) {
-        $doctorInfo = array_filter($doctorsInfo, fn($doctorInfo) => $doctorInfo->id === $user->id)[0] ?? null;
-        if (!$doctorInfo) {
-          continue;
-        }
-
-        if ($user->firstName === $name || $user->secondName === $name) {
-          $doctors[] = new Doctor(
-              $user->id,
-              $user->firstName,
-              $user->lastName,
-              $user->email,
-              $user->profilePicture,
-              $doctorInfo->specialty,
-              $doctorInfo->education
-          );
-        }
-      }
-
-      return $doctors;
-    }
-
-    public function getAllDoctors($currentUserId): array
-    {
-      $users = $this->usersRepository->getAllDoctors();
-      $doctorsInfo = $this->doctorInfoRepository->getAll();
-
-      $doctors = [];
-      /*
-        if the current user is a doctor
-        don't show him
-      */
-      foreach ($users as $user) {
-        if ($user->id === $currentUserId) {
-          continue;
-        }
-
-        $filteredArray = array_filter($doctorsInfo, fn($doctorInfo) => $doctorInfo->id === $user->id);
-        $doctorInfo = array_shift($filteredArray) ?? null;
-
-        if (!$doctorInfo) {
-          continue;
-        }
-
-        $doctors[] = new Doctor(
-            $user->id,
-            $user->firstName,
-            $user->lastName,
-            $user->email,
-            $user->profilePicture,
-            $doctorInfo->specialty,
-            $doctorInfo->education
-        );
-      }
-
-      return $doctors;
-    }
-
     public function getById($id): ?Doctor
     {
       $user = $this->usersRepository->getDoctorById($id);
@@ -99,5 +35,61 @@
           $doctorInfo->specialty,
           $doctorInfo->education
       );
+    }
+
+    public function searchByName($name): array
+    {
+      $users = $this->usersRepository->searchDoctorsByName($name);
+      $doctorsInfo = $this->doctorInfoRepository->getAll();
+
+      return $this->constructDoctorsFromArray($doctorsInfo, $users);
+    }
+
+    public function constructDoctorsFromArray(array $doctorsInfo, array $users): array
+    {
+      $doctors = [];
+      foreach ($doctorsInfo as $doctorInfo) {
+        $filteredDoctors = array_filter($users, fn($user) => $user->id === $doctorInfo->id);
+        $user = array_shift($filteredDoctors) ?? null;
+        if (!$user) {
+          continue;
+        }
+
+        $doctors[] = new Doctor(
+            $user->id,
+            $user->firstName,
+            $user->lastName,
+            $user->email,
+            $user->profilePicture,
+            $doctorInfo->specialty,
+            $doctorInfo->education
+        );
+      }
+      return $doctors;
+    }
+
+    public function searchBySpecialtyAndName($specialty, $name): array
+    {
+      $doctorsInfo = $this->doctorInfoRepository->searchBySpecialty($specialty);
+      $users = $this->usersRepository->searchDoctorsByName($name);
+
+      return $this->constructDoctorsFromArray($doctorsInfo, $users);
+    }
+
+    public function searchBySpecialty($specialty): array
+    {
+      $doctorsInfo = $this->doctorInfoRepository->searchBySpecialty($specialty);
+      $users = $this->usersRepository->getAllDoctors();
+
+      return $this->constructDoctorsFromArray($doctorsInfo, $users);
+    }
+
+    public function getAllDoctors($currentUserId): array
+    {
+      $users = $this->usersRepository->getAllDoctors();
+      $doctorsInfo = $this->doctorInfoRepository->getAll();
+
+      $doctors = $this->constructDoctorsFromArray($doctorsInfo, $users);
+      return array_filter($doctors, fn($doctor) => $doctor->id !== $currentUserId);
     }
   }

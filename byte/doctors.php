@@ -15,15 +15,17 @@
   $id = $_SESSION['id'];
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = isset($_POST['name']) ? trim($_POST['name']) : '';
-    $specialty = isset($_POST['specialty']) ? trim($_POST['specialty']) : '';
+    $name = isset($_POST['name']) ? trim($_POST['name']) : null;
+    $specialty = isset($_POST['specialty']) ? trim($_POST['specialty']) : null;
 
     if ($name && $specialty) {
-      $doctors = $doctorRepository->searchByNameAndSpecialty($name, $specialty);
+      $doctors = $doctorRepository->searchBySpecialtyAndName($specialty, $name);
     } elseif ($name) {
       $doctors = $doctorRepository->searchByName($name);
     } elseif ($specialty) {
       $doctors = $doctorRepository->searchBySpecialty($specialty);
+    } else {
+      $doctors = $doctorRepository->getAllDoctors($id);
     }
   } else {
     $doctors = $doctorRepository->getAllDoctors($id);
