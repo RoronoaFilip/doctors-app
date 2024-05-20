@@ -101,7 +101,7 @@
 
       return $this->constructUser($users[0]);
     }
-
+    
     public function getAllDoctors(): array
     {
       $doctors = $this->select([

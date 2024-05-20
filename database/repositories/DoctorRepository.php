@@ -21,13 +21,21 @@
       $this->doctorInfoRepository = new DoctorInfoRepository();
     }
 
-    public function getAllDoctors(): array
+    public function getAllDoctors($currentUserId): array
     {
       $users = $this->usersRepository->getAllDoctors();
       $doctorsInfo = $this->doctorInfoRepository->getAll();
 
       $doctors = [];
+      /*
+        if the current user is a doctor 
+        don't show him
+      */
       foreach ($users as $user) {
+        if($user->id === $currentUserId) {
+          continue;
+        }
+
         $doctorInfo = array_filter($doctorsInfo, fn($doctorInfo) => $doctorInfo->id === $user->id)[0] ?? null;
         if (!$doctorInfo) {
           continue;
@@ -47,7 +55,7 @@
       return $doctors;
     }
 
-    public function getDoctorByName($name): array
+    public function searchByName($name): array
     {
         $users = $this->usersRepository->getAllDoctors();
         $doctorsInfo = $this->doctorInfoRepository->getAll();

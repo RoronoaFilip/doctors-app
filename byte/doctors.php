@@ -7,6 +7,12 @@ use repositories\DoctorRepository;
 
 $doctorRepository = new DoctorRepository();
 $doctors = [];
+/*
+    this id is needed because we doesn't want
+    to show the current user if he is a doctor
+    in the doctors list
+*/
+$id = $_SESSION['id'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = isset($_POST['name']) ? trim($_POST['name']) : '';
@@ -20,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $doctors = $doctorRepository->searchBySpecialty($specialty);
     }
 } else {
-    $doctors = $doctorRepository->getAllDoctors();
+    $doctors = $doctorRepository->getAllDoctors($id);
 }
 ?>
 
@@ -37,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h1 class="page-title mt-4">Списък с всички лекари:</h1>
 
     <section class="search-bar">
-        <form class="search-form" method="POST" action="/byte/doctors.php">
+        <form class="search-form" method="POST" action="submit_question.php">
             <input type="text" class="form-control" name="name" placeholder="Търсене по име">
             <input type="text" class="form-control" name="specialty" placeholder="Търсене по специалност">
             <button type="submit" class="btn primary-btn">Търсене</button>

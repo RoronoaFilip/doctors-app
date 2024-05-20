@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2024 at 10:46 PM
+-- Generation Time: May 19, 2024 at 09:58 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,7 +38,8 @@ CREATE TABLE `doctors_info` (
 --
 
 INSERT INTO `doctors_info` (`id`, `specialty`, `education`) VALUES
-(11, 'Dermatologist', 'Sofia Medical University');
+(11, 'Dermatologist', 'Sofia Medical University'),
+(26, 'Зъболекар', 'Доктор');
 
 -- --------------------------------------------------------
 
@@ -60,6 +61,20 @@ INSERT INTO `photos` (`id`, `photo_url`, `alt`) VALUES
 (1, '/public/photos/default_profile_picture.png', 'default_profile_picture'),
 (21, '/public/profile_pictures/filip@email.com.png', 'default_profile_picture'),
 (22, '/public/profile_pictures/admin@admin.admin.png', 'default_profile_picture');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `questions`
+--
+
+CREATE TABLE `questions` (
+  `id` bigint(60) DEFAULT NULL,
+  `doctor_id` bigint(60) DEFAULT NULL,
+  `user_id` bigint(60) DEFAULT NULL,
+  `question` varchar(500) NOT NULL,
+  `answer` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -86,7 +101,8 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `user_type`, `email`, `pas
 (1, 'Filip', 'Filchev', 'ADMIN', 'filip@email.com', '$2y$10$QdXJrjhm0UAqE9rA36x1H.D31w5tqR7y4kK7ra5nTJkq5azE9wHNa', NULL, 21),
 (2, 'admin', 'adminov', 'ADMIN', 'admin@admin.admin', '$2y$10$Ac6yjsOXdq8tIrHwfFCNdeDJpofDQGU4zlhTdRjXAbhBTT7R8gg0e', NULL, 22),
 (11, 'Doctor', 'Doctorov', 'DOCTOR', 'doctor@doctor.com', '$2y$10$lviQpfPc/wE4fgyeQbssfOFw6HcYeFukT/nBLRxESO6U3fCdcKQ2C', '+123456', 1),
-(12, 'user', 'userov', 'USER', 'user@user.com', '$2y$10$td/LB4feU39ntij6VOlVxuj2qghsVUlSkgXIvCw8.uoap32LxSuYm', NULL, 1);
+(12, 'user', 'userov', 'USER', 'user@user.com', '$2y$10$td/LB4feU39ntij6VOlVxuj2qghsVUlSkgXIvCw8.uoap32LxSuYm', NULL, 1),
+(26, 'Doki', 'Dok', 'DOCTOR', 'doktora@abv.bg', '$2y$10$L.u.dxRBozNytUxMM0NEeu1YWiICowAffIgo1YsoQ08rLt.EYWIwi', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -124,6 +140,13 @@ ALTER TABLE `photos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `questions`
+--
+ALTER TABLE `questions`
+  ADD KEY `doctor_id` (`doctor_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -153,7 +176,7 @@ ALTER TABLE `photos`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'primary key', AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'primary key', AUTO_INCREMENT=27;
 
 --
 -- Constraints for dumped tables
@@ -164,6 +187,13 @@ ALTER TABLE `users`
 --
 ALTER TABLE `doctors_info`
   ADD CONSTRAINT `user_id_fk` FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `questions`
+--
+ALTER TABLE `questions`
+  ADD CONSTRAINT `doctor_id` FOREIGN KEY (`doctor_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `users`
