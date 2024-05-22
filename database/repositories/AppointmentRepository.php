@@ -27,7 +27,7 @@
           'comment' => $appointment->comment
       ]);
 
-      return $appointment;
+      return $this->getById($this->getLastInsertId());
     }
 
     public function getById($id): ?Appointment

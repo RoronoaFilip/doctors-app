@@ -38,16 +38,14 @@
   echo '<section class="list">';
   echo $item;
   echo '</section>';
+
+  $appointmentRedirectUrl = '/byte/appointment_create.php?doctorId=' . $id;
 ?>
 <div>
-    <button type="button" onclick="location.href='/byte/reservations.php'">Направи Резервация</button>
+    <button type="button"><a class="appointment-href" href="<?php echo $appointmentRedirectUrl ?>">Направи
+            Резервация</a></button>
 </div>
 <div>
-    <h2>Въпроси</h2>
-    <div>
-
-        <button type="button" onclick="location.href='/byte/reservations.php'">Направи Резервация</button>
-    </div>
     <div>
         <h2>Въпроси</h2>
         <div>
@@ -68,8 +66,8 @@
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var askQuestionBtn = document.getElementById('askQuestionBtn');
-        var questionForm = document.getElementById('questionForm');
+        const askQuestionBtn = document.getElementById('askQuestionBtn');
+        const questionForm = document.getElementById('questionForm');
 
         askQuestionBtn.addEventListener('click', function () {
             questionForm.style.display = 'block';

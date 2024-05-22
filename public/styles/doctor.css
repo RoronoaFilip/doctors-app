@@ -4,3 +4,8 @@
     border-radius: 50%;
     object-fit: cover;
 }
+
+.appointment-href {
+    color: #000;
+    text-decoration: none;
+}

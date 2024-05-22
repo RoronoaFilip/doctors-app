@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2024 at 04:59 PM
+-- Generation Time: May 22, 2024 at 07:31 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,7 +40,13 @@ CREATE TABLE `appointments` (
 --
 
 INSERT INTO `appointments` (`id`, `doctor_id`, `user_id`, `date`, `comment`) VALUES
-(1, 11, 12, '2024-07-15 10:00:00', 'Some description for a Test Appointment');
+(1, 11, 12, '2024-07-15 10:00:00', 'Some description for a Test Appointment'),
+(2, 11, 12, '2023-07-15 10:00:00', 'Year 2023'),
+(3, 11, 12, '2024-07-15 10:00:00', 'Year 2024'),
+(4, 11, 12, '2025-07-15 10:00:00', 'Year 2025'),
+(5, 11, 12, '2026-07-15 10:00:00', 'Year 2026'),
+(6, 26, 2, '2024-05-31 20:33:00', 'Test Create Future'),
+(7, 26, 2, '2024-05-06 20:31:00', 'Test Create Past');
 
 -- --------------------------------------------------------
 
@@ -79,9 +85,7 @@ CREATE TABLE `photos` (
 --
 
 INSERT INTO `photos` (`id`, `photo_url`, `alt`) VALUES
-(1, '/public/photos/default_profile_picture.png', 'default_profile_picture'),
-(21, '/public/profile_pictures/filip@email.com.png', 'default_profile_picture'),
-(22, '/public/profile_pictures/admin@admin.admin.png', 'default_profile_picture');
+(1, '/public/photos/default_profile_picture.png', 'default_profile_picture');
 
 -- --------------------------------------------------------
 
@@ -126,8 +130,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `user_type`, `email`, `password`, `phone`, `profile_picture_id`) VALUES
-(1, 'Filip', 'Filchev', 'ADMIN', 'filip@email.com', '$2y$10$QdXJrjhm0UAqE9rA36x1H.D31w5tqR7y4kK7ra5nTJkq5azE9wHNa', NULL, 21),
-(2, 'admin', 'adminov', 'ADMIN', 'admin@admin.admin', '$2y$10$Ac6yjsOXdq8tIrHwfFCNdeDJpofDQGU4zlhTdRjXAbhBTT7R8gg0e', NULL, 22),
+(1, 'Filip', 'Filchev', 'ADMIN', 'filip@email.com', '$2y$10$QdXJrjhm0UAqE9rA36x1H.D31w5tqR7y4kK7ra5nTJkq5azE9wHNa', NULL, 1),
+(2, 'admin', 'adminov', 'ADMIN', 'admin@admin.admin', '$2y$10$Ac6yjsOXdq8tIrHwfFCNdeDJpofDQGU4zlhTdRjXAbhBTT7R8gg0e', NULL, 1),
 (11, 'Doctor', 'Doctorov', 'DOCTOR', 'doctor@doctor.com', '$2y$10$lviQpfPc/wE4fgyeQbssfOFw6HcYeFukT/nBLRxESO6U3fCdcKQ2C', '+123456', 1),
 (12, 'user', 'userov', 'USER', 'user@user.com', '$2y$10$td/LB4feU39ntij6VOlVxuj2qghsVUlSkgXIvCw8.uoap32LxSuYm', NULL, 1),
 (26, 'Doki', 'Dok', 'DOCTOR', 'doktora@abv.bg', '$2y$10$L.u.dxRBozNytUxMM0NEeu1YWiICowAffIgo1YsoQ08rLt.EYWIwi', '08888888', 1);
@@ -207,7 +211,7 @@ ALTER TABLE `user_types`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'the appointments id', AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'the appointments id', AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `photos`

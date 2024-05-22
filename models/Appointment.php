@@ -7,7 +7,7 @@
 
   class Appointment
   {
-    public int $id;
+    public $id;
     public Doctor $doctor;
     public User $user;
     public DateTime $date;
