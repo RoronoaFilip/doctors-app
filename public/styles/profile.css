@@ -7,12 +7,13 @@ body {
 }
 
 .profile,
-.appointments {
+.appointments-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
 
-    max-width: 70%;
+    width: 80%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -25,6 +26,37 @@ body {
     }
 }
 
+.appointments-container {
+    height: 50%;
+}
+
+.appointments-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 10px;
+
+    overflow-y: hidden;
+
+    width: 100%;
+}
+
+.appointments {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    overflow-y: scroll;
+    width: 30%;
+    height: 100%;
+}
+
+.appointment {
+    padding: 10px;
+    border: 1px solid #3A1800;
+    border-radius: 10px;
+}
+
 .profile h2 {
     margin-bottom: 20px;
     color: #333;
@@ -32,4 +64,9 @@ body {
     text-align: center;
 }
 
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
 
