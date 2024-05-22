@@ -11,7 +11,6 @@
     position: relative;
     overflow: hidden;
     transition: all 0.3s;
-
     margin-top: 20px;
 
     border-radius: 20px;
@@ -71,6 +70,39 @@
         transform: scaleX(1);
         left: 0;
         transform-origin: right;
+    }
+}
+
+.answer-button {
+    width: var(--button-length);
+    height: 55px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    margin-top: 20px;
+    color: white;
+
+    border-radius: 20px;
+    background-color: var(--primary-color);
+    box-shadow: 9px 9px 13px #c0bdbd,
+    -9px -9px 13px #ffffff;
+
+    &::before {
+        content: "";
+        width: 200%;
+        height: 200%;
+        background-color: var(--primary-color);
+        position: absolute;
+        z-index: 1;
+        transform: scale(0);
+        transition: all 0.3s;
+        border-radius: 50%;
+        filter: blur(10px);
     }
 }
 

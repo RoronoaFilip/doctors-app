@@ -10,7 +10,7 @@
   $targetPath = $targetDir . $_SESSION['email'] . '.png';
 
   $image = file_get_contents($imagePath);
-  move_uploaded_file($imagePath, __DIR__ . '/../' . $targetPath);
+  move_uploaded_file($imagePath, __DIR__ . '/..' . $targetPath);
 
   $userRepository = new UsersRepository();
   $result = $userRepository->updateProfilePicture($_SESSION['email'], $targetPath);
