@@ -68,4 +68,4 @@
   }
 
   header('Location: /byte/main.php');
-
+?>

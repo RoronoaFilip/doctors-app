@@ -5,6 +5,7 @@
 </head>
 <body>
     <?php
+        require_once 'shared/head.php';
         require_once 'shared/header.php'
     ?>
     <?php
@@ -48,8 +49,9 @@
             <button type="button" id="askQuestionBtn">Задай Въпрос</button>
             <div id="questionForm" style="display: none;">
                 <form method="post" action="submit_question.php">
-                    <label for="answer">Въпрос:</label>
-                    <input type="text" id="answer" name="answer">
+                    <label for="question">Въпрос:</label>
+                    <input type="text" id="question" name="question">
+                    <input type="hidden" name="doctor_id" value="<?php echo $id; ?>">
                     <button type="submit" name="submitQuestionBtn">Изпрати</button>
                 </form>
             </div>
