@@ -4,28 +4,30 @@
     and updates it
 */
 
-require_once __DIR__ . '/../database/repositories/QuestionRepository.php';
+    session_start();
 
-use repositories\QuestionRepository;
+    //require_once __DIR__ . '/../database/repositories/UsersRepository.php';
+    //require_once __DIR__ . '/../database/repositories/DoctorInfoRepository.php';
+    require_once __DIR__ . '/../database/repositories/QuestionRepository.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $questionId = isset($_POST['question_id']) ? trim($_POST['question_id']) : '';
-    $answer = isset($_POST['answer']) ? trim($_POST['answer']) : '';
+    use repositories\DoctorInfoRepository;
+    use repositories\UsersRepository;
+    use repositories\QuestionRepository;
 
-    if (!empty($questionId) && !empty($answer)) {
-        $questionRepository = new QuestionRepository();
-        $question = $questionRepository->getQuestionById($questionId);
+    //$userRepository = new UsersRepository();
+    //$doctorRepository = new DoctorInfoRepository();
+    $questionRepository = new QuestionRepository();
 
-        if ($question) {
-            $questionRepository->updateQuestion($questionId, $answer);
+    $question_id = $_POST['question_id'] ?? null;
+    $question = $questionRepository->getById($question_id);
+    $answer = $_POST['answer'] ?? null;
 
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
-            exit();
-        } else {
-            echo "Question not found.";
-        }
-    }
-} else {
-    echo "Invalid request method.";
-}
+    $updatedQuestion = $questionRepository->update($question_id, [
+        "doctor_id" => $question->doctor_id,
+        "user_id" => $question->user_id,
+        "question" => $question->question,
+        "answer" => $answer
+    ]);
+
+    header('Location: /byte/answer_questions.php')
 ?>

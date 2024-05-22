@@ -38,5 +38,11 @@
     }
   ?>
 </section>
+<section class="appointments">
+    <h3>Appointments:</h3>
+  <?php
+    include "shared/appointments_display.php";
+  ?>
+</section>
 </body>
 </html>

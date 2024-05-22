@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2024 at 09:58 AM
+-- Generation Time: May 22, 2024 at 04:59 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `byte`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `appointments`
+--
+
+CREATE TABLE `appointments` (
+  `id` bigint(20) NOT NULL COMMENT 'the appointments id',
+  `doctor_id` bigint(20) NOT NULL COMMENT 'foreign key to the doctor',
+  `user_id` bigint(20) NOT NULL COMMENT 'foreign key to the user',
+  `date` datetime NOT NULL COMMENT 'the date and time of the appointment',
+  `comment` text NOT NULL COMMENT 'comment to the appointment'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `appointments`
+--
+
+INSERT INTO `appointments` (`id`, `doctor_id`, `user_id`, `date`, `comment`) VALUES
+(1, 11, 12, '2024-07-15 10:00:00', 'Some description for a Test Appointment');
 
 -- --------------------------------------------------------
 
@@ -69,12 +90,19 @@ INSERT INTO `photos` (`id`, `photo_url`, `alt`) VALUES
 --
 
 CREATE TABLE `questions` (
-  `id` bigint(60) DEFAULT NULL,
+  `id` bigint(60) NOT NULL,
   `doctor_id` bigint(60) DEFAULT NULL,
   `user_id` bigint(60) DEFAULT NULL,
   `question` varchar(500) NOT NULL,
-  `answer` varchar(200) NOT NULL
+  `answer` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `questions`
+--
+
+INSERT INTO `questions` (`id`, `doctor_id`, `user_id`, `question`, `answer`) VALUES
+(3, 26, 2, 'asd', NULL);
 
 -- --------------------------------------------------------
 
@@ -102,7 +130,7 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `user_type`, `email`, `pas
 (2, 'admin', 'adminov', 'ADMIN', 'admin@admin.admin', '$2y$10$Ac6yjsOXdq8tIrHwfFCNdeDJpofDQGU4zlhTdRjXAbhBTT7R8gg0e', NULL, 22),
 (11, 'Doctor', 'Doctorov', 'DOCTOR', 'doctor@doctor.com', '$2y$10$lviQpfPc/wE4fgyeQbssfOFw6HcYeFukT/nBLRxESO6U3fCdcKQ2C', '+123456', 1),
 (12, 'user', 'userov', 'USER', 'user@user.com', '$2y$10$td/LB4feU39ntij6VOlVxuj2qghsVUlSkgXIvCw8.uoap32LxSuYm', NULL, 1),
-(26, 'Doki', 'Dok', 'DOCTOR', 'doktora@abv.bg', '$2y$10$L.u.dxRBozNytUxMM0NEeu1YWiICowAffIgo1YsoQ08rLt.EYWIwi', NULL, 1);
+(26, 'Doki', 'Dok', 'DOCTOR', 'doktora@abv.bg', '$2y$10$L.u.dxRBozNytUxMM0NEeu1YWiICowAffIgo1YsoQ08rLt.EYWIwi', '08888888', 1);
 
 -- --------------------------------------------------------
 
@@ -128,6 +156,14 @@ INSERT INTO `user_types` (`type`) VALUES
 --
 
 --
+-- Indexes for table `appointments`
+--
+ALTER TABLE `appointments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `doctor_fk` (`doctor_id`),
+  ADD KEY `user_fk` (`user_id`);
+
+--
 -- Indexes for table `doctors_info`
 --
 ALTER TABLE `doctors_info`
@@ -143,6 +179,7 @@ ALTER TABLE `photos`
 -- Indexes for table `questions`
 --
 ALTER TABLE `questions`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `doctor_id` (`doctor_id`),
   ADD KEY `user_id` (`user_id`);
 
@@ -167,10 +204,22 @@ ALTER TABLE `user_types`
 --
 
 --
+-- AUTO_INCREMENT for table `appointments`
+--
+ALTER TABLE `appointments`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'the appointments id', AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `photos`
 --
 ALTER TABLE `photos`
   MODIFY `id` bigint(60) NOT NULL AUTO_INCREMENT COMMENT 'ID of the photo', AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `id` bigint(60) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -181,6 +230,13 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `appointments`
+--
+ALTER TABLE `appointments`
+  ADD CONSTRAINT `doctor_fk` FOREIGN KEY (`doctor_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `user_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `doctors_info`
