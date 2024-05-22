@@ -5,6 +5,7 @@
 </head>
 <body>
 <?php
+  require_once 'shared/head.php';
   require_once 'shared/header.php'
 ?>
 <?php
@@ -44,13 +45,21 @@
 <div>
     <h2>Въпроси</h2>
     <div>
-        <button type="button" id="askQuestionBtn">Задай Въпрос</button>
-        <div id="questionForm" style="display: none;">
-            <form method="post" action="submit_question.php">
-                <label for="answer">Въпрос:</label>
-                <input type="text" id="answer" name="answer">
-                <button type="submit" name="submitQuestionBtn">Изпрати</button>
-            </form>
+
+        <button type="button" onclick="location.href='/byte/reservations.php'">Направи Резервация</button>
+    </div>
+    <div>
+        <h2>Въпроси</h2>
+        <div>
+            <button type="button" id="askQuestionBtn">Задай Въпрос</button>
+            <div id="questionForm" style="display: none;">
+                <form method="post" action="submit_question.php">
+                    <label for="question">Въпрос:</label>
+                    <input type="text" id="question" name="question">
+                    <input type="hidden" name="doctor_id" value="<?php echo $id; ?>">
+                    <button type="submit" name="submitQuestionBtn">Изпрати</button>
+                </form>
+            </div>
         </div>
     </div>
   <?php

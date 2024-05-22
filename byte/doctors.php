@@ -52,7 +52,8 @@
     <h1 class="page-title mt-4">Списък с всички лекари:</h1>
 
     <section class="search-bar">
-        <form class="search-form" method="POST" action="/byte/doctors.php">
+
+        <form class="search-form" method="POST" action="">
             <input type="text" class="form-control" name="name" placeholder="Търсене по име">
             <input type="text" class="form-control" name="specialty" placeholder="Търсене по специалност">
             <button type="submit" class="btn primary-btn">Търсене</button>

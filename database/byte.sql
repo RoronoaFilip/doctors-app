@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2024 at 10:44 PM
+-- Generation Time: May 22, 2024 at 04:59 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -90,12 +90,19 @@ INSERT INTO `photos` (`id`, `photo_url`, `alt`) VALUES
 --
 
 CREATE TABLE `questions` (
-  `id` bigint(60) DEFAULT NULL,
+  `id` bigint(60) NOT NULL,
   `doctor_id` bigint(60) DEFAULT NULL,
   `user_id` bigint(60) DEFAULT NULL,
   `question` varchar(500) NOT NULL,
-  `answer` varchar(200) NOT NULL
+  `answer` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `questions`
+--
+
+INSERT INTO `questions` (`id`, `doctor_id`, `user_id`, `question`, `answer`) VALUES
+(3, 26, 2, 'asd', NULL);
 
 -- --------------------------------------------------------
 
@@ -123,7 +130,7 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `user_type`, `email`, `pas
 (2, 'admin', 'adminov', 'ADMIN', 'admin@admin.admin', '$2y$10$Ac6yjsOXdq8tIrHwfFCNdeDJpofDQGU4zlhTdRjXAbhBTT7R8gg0e', NULL, 22),
 (11, 'Doctor', 'Doctorov', 'DOCTOR', 'doctor@doctor.com', '$2y$10$lviQpfPc/wE4fgyeQbssfOFw6HcYeFukT/nBLRxESO6U3fCdcKQ2C', '+123456', 1),
 (12, 'user', 'userov', 'USER', 'user@user.com', '$2y$10$td/LB4feU39ntij6VOlVxuj2qghsVUlSkgXIvCw8.uoap32LxSuYm', NULL, 1),
-(26, 'Doki', 'Dok', 'DOCTOR', 'doktora@abv.bg', '$2y$10$L.u.dxRBozNytUxMM0NEeu1YWiICowAffIgo1YsoQ08rLt.EYWIwi', NULL, 1);
+(26, 'Doki', 'Dok', 'DOCTOR', 'doktora@abv.bg', '$2y$10$L.u.dxRBozNytUxMM0NEeu1YWiICowAffIgo1YsoQ08rLt.EYWIwi', '08888888', 1);
 
 -- --------------------------------------------------------
 
@@ -172,6 +179,7 @@ ALTER TABLE `photos`
 -- Indexes for table `questions`
 --
 ALTER TABLE `questions`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `doctor_id` (`doctor_id`),
   ADD KEY `user_id` (`user_id`);
 
@@ -206,6 +214,12 @@ ALTER TABLE `appointments`
 --
 ALTER TABLE `photos`
   MODIFY `id` bigint(60) NOT NULL AUTO_INCREMENT COMMENT 'ID of the photo', AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `id` bigint(60) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -6,6 +6,7 @@ use models\Question;
 
 require_once __DIR__ . '/UsersRepository.php';
 require_once __DIR__ . '/../../models/User.php';
+require_once __DIR__ . '/../../models/Question.php';
 
 class QuestionRepository extends Repository
 {
@@ -17,7 +18,7 @@ class QuestionRepository extends Repository
       $this->usersRepository = new UsersRepository();
     }
 
-    private function constructQuestion($foundQuestion): Question
+    private function constructQuestion($foundQuestion): ?Question
     {
       $question = new Question(
           $foundQuestion['doctor_id'],
@@ -25,8 +26,38 @@ class QuestionRepository extends Repository
           $foundQuestion['question'],
           $foundQuestion['answer']
       );
+      $question->id = $foundQuestion['id'] ?? null;
 
       return $question;
+    }
+
+    public function create(Question $question): ?Question
+    {
+      $result = $this->insert([
+          "doctor_id" => $question->doctor_id,
+          "user_id" => $question->user_id,
+          "question" => $question->question,
+          "answer" => $question->answer
+      ]);
+
+      if (!$result) {
+        return false;
+      }
+
+      return $this->getById($this->getLastInsertId());
+    }
+    
+    public function getById($id): ?Question
+    {
+      $questions = $this->select([
+          "id" => $id
+      ]);
+
+      if (!$questions) {
+        return null;
+      }
+
+      return $this->constructQuestion($questions[0]);
     }
 
     public function getQuestions($doctorId): ?array
@@ -48,6 +79,27 @@ class QuestionRepository extends Repository
         return $questions;
     }
 
+    public function getNotAnsweredQuestions($doctorId): ?array
+    {
+        $questionsForDoctor = $this->select([
+            'doctor_id' => $doctorId
+        ]);
+  
+        $questions = [];
+
+        if(!$questionsForDoctor) {
+            return null;
+        }
+
+        foreach ($questionsForDoctor as $questionForDoctor) {
+            if(!isset($questionForDoctor['answer']) || $questionForDoctor['answer'] === null) {
+                $questions[] = $this->constructQuestion($questionForDoctor);
+            }
+        }
+  
+        return $questions;
+    }
+
     public function getQuestionById($questionId): ?Question
     {
         $questions = $this->select([
@@ -60,18 +112,6 @@ class QuestionRepository extends Repository
 
         return $this->constructQuestion($questions[0]);
     }
-
-    public function updateQuestion($questionId, $answer)
-    {
-        $question = $this->getQuestionById($questionId);
-        $question->answer = $answer;
-        //how to save it
-    }
-
-    public function addQuestion($user_id, $doctor_id, $question) {
-        //add question
-    }
-
 }
 
 ?>
