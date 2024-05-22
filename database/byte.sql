@@ -24,6 +24,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `appointments`
+--
+
+CREATE TABLE `appointments` (
+  `id` bigint(20) NOT NULL COMMENT 'the appointments id',
+  `doctor_id` bigint(20) NOT NULL COMMENT 'foreign key to the doctor',
+  `user_id` bigint(20) NOT NULL COMMENT 'foreign key to the user',
+  `date` datetime NOT NULL COMMENT 'the date and time of the appointment',
+  `comment` text NOT NULL COMMENT 'comment to the appointment'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `appointments`
+--
+
+INSERT INTO `appointments` (`id`, `doctor_id`, `user_id`, `date`, `comment`) VALUES
+(1, 11, 12, '2024-07-15 10:00:00', 'Some description for a Test Appointment');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `doctors_info`
 --
 
@@ -135,6 +156,14 @@ INSERT INTO `user_types` (`type`) VALUES
 --
 
 --
+-- Indexes for table `appointments`
+--
+ALTER TABLE `appointments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `doctor_fk` (`doctor_id`),
+  ADD KEY `user_fk` (`user_id`);
+
+--
 -- Indexes for table `doctors_info`
 --
 ALTER TABLE `doctors_info`
@@ -175,6 +204,12 @@ ALTER TABLE `user_types`
 --
 
 --
+-- AUTO_INCREMENT for table `appointments`
+--
+ALTER TABLE `appointments`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'the appointments id', AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `photos`
 --
 ALTER TABLE `photos`
@@ -195,6 +230,13 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `appointments`
+--
+ALTER TABLE `appointments`
+  ADD CONSTRAINT `doctor_fk` FOREIGN KEY (`doctor_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `user_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `doctors_info`

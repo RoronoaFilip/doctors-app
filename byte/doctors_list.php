@@ -1,5 +1,6 @@
 <?php
 
+  global $doctors;
   $items = '';
   foreach ($doctors as $doctor) {
     $items .= '<div class="list-item__content">';
@@ -13,7 +14,4 @@
     $items .= '</div>';
   }
 
-  echo '<section class="list">';
   echo $items;
-  echo '</section>';
-?>
