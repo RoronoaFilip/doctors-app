@@ -1,0 +1,12 @@
+.main-link {
+    font-size: 23px;
+    color: #5d4037;
+    margin-bottom: 40px; 
+    display: block; 
+    text-decoration: none; 
+}
+
+.main-link:hover {
+    text-decoration: none; 
+    color: grey; 
+}

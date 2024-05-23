@@ -1,6 +1,111 @@
-.doctor-photo {
-    width: 100px;
-    height: 100px;
+.doctor-picture {
+    max-width: 32%;
+    margin-right: 20px;
+    border: 2px solid #ddd;
     border-radius: 50%;
-    object-fit: cover;
+}
+
+.doctor-profile {
+    display: flex;
+    justify-content: flex-start;
+    max-width: 70%;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.doctor-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px auto;
+    max-width: 70%;
+}
+
+.button-container button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #5d4037;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-container button:hover {
+    background-color: #5d4037;
+}
+
+#questionForm {
+    margin-top: 20px;
+    max-width: 70%;
+    margin: 20px auto;
+}
+
+#questionForm form {
+    display: flex;
+    flex-direction: column;
+}
+
+#questionForm label {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#questionForm .input-container {
+    display: flex;
+    align-items: center;
+}
+
+#questionForm input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+#questionForm button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #5d4037;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#questionForm button:hover {
+    background-color: #5d4037;
+}
+
+.questions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between each question box */
+    width: 80%; /* Ensure container takes up full width */
+}
+
+.question-box {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ensure question boxes take up full width */
+}
+
+.question-box p {
+    margin: 0 0 10px;
 }

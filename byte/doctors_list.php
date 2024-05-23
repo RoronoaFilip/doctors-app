@@ -9,7 +9,7 @@
     $items .= '<h3>' . $doctor->firstName . ' ' . $doctor->lastName . '</h3>';
     $items .= '<p> Специалност: ' . $doctor->specialty . '</p>';
     $items .= '<p> Образование: ' . $doctor->education . '</p>';
-    $items .= '<a href="/byte/doctor.php?id=' . $doctor->id . '">View Profile</a>';
+    $items .= '<button type="button" class="profile-button" onclick="location.href=\'/byte/doctor.php?id=' . $doctor->id . '\'">Виж Профил</button>';
     $items .= '</div>';
     $items .= '</div>';
   }

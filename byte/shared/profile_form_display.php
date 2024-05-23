@@ -61,7 +61,7 @@ EOT;
 */
   if($userType === 'DOCTOR') {
     $items .= <<<EOT
-          <button type="button" onclick="location.href='/byte/answer_questions.php'">Отговори на въпроси</button>
+          <button type="button" class="question-button" onclick="location.href='/byte/answer_questions.php'">Отговори на въпроси</button>
 EOT;
   }
 
