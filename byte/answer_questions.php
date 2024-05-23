@@ -1,4 +1,7 @@
 <?php
+  echo '<link rel="stylesheet" href="../public/styles/answer-questions.css">';
+?>
+<?php
     /*
         file where we process the action of
         answering certain question
@@ -20,20 +23,20 @@
 
     $items = '';
     foreach ($questions as $question) {
-        $items .= '<div class="list-item__content">';
+        $items .= '<div class="question-box">';
         $items .= '<div>';
         $items .= '<p> Въпрос: ' . $question->question . '</p>';
         $items .= '<form method="POST" action="process_question.php">';
         $items .= '<input type="hidden" name="question_id" value="' . $question->id . '">';
-        $items .= '<label for="answer">Отговор</label>';
+        $items .= '<label for="answer">Отговор: </label>';
         $items .= '<input type="text" id="answer" name="answer">';
-        $items .= '<button type="submit">Запази отговор</button>';
+        $items .= '<button type="submit" class="question-button">Запази отговор</button>';
         $items .= '</form>';
         $items .= '</div>';
         $items .= '</div>';
       }
     
-      echo '<section class="list">';
+      echo '<section class="quesitons-container">';
       echo $items;
       echo '</section>';
 ?>

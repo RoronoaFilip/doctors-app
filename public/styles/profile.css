@@ -63,10 +63,3 @@ body {
     font-size: 34px;
     text-align: center;
 }
-
-.button-wrapper {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-

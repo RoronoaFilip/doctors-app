@@ -13,7 +13,9 @@
       }
 
       $items = <<<EOT
-                        <div class="nav-item">Hello, $fullName</div>
+                        <div class="nav-item">
+                            <a class="nav-link" href="/byte/main.php">Начало</a>
+                        </div>
                         <div class="nav-item">
                             <a class="nav-link" href="/byte/doctors.php">Доктори</a>
                         </div>

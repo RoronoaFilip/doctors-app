@@ -6,7 +6,7 @@
 <body>
 <?php
   require_once 'shared/head.php';
-  require_once 'shared/header.php'
+  require_once 'shared/header.php';
 ?>
 <?php
   require_once __DIR__ . '/../database/repositories/DoctorRepository.php';
@@ -22,8 +22,8 @@
   $doctor = $doctorRepository->getById($id);
   $questions = $questionsRepository->getQuestions($id) ?? [];
 
-  $item = '<div class="list-item__content">';
-  $item .= '<img class="doctor-photo" src="' . $doctor->profilePicture->url . '" alt="profile picture">';
+  $item = '<div class="doctor-profile">';
+  $item .= '<img class="doctor-picture" src="' . $doctor->profilePicture->url . '" alt="profile picture">';
   $item .= '<div class="doctor-info">';
   $item .= '<h3>' . $doctor->firstName . ' ' . $doctor->lastName . '</h3>';
   $item .= '<p> Имейл: ' . $doctor->email . '</p>';
@@ -41,38 +41,34 @@
 
   $appointmentRedirectUrl = '/byte/appointment_create.php?doctorId=' . $id;
 ?>
-<div>
-    <button type="button"><a class="appointment-href" href="<?php echo $appointmentRedirectUrl ?>">Направи
-            Резервация</a></button>
+<div class="button-container">
+    <button type="button" class="" onclick="location.href='/byte/reservations.php'">Направи Резервация</button>
+    <button type="button" id="askQuestionBtn">Задай Въпрос</button>
 </div>
-<div>
-    <div>
-        <h2>Въпроси</h2>
-        <div>
-            <button type="button" id="askQuestionBtn">Задай Въпрос</button>
-            <div id="questionForm" style="display: none;">
-                <form method="post" action="submit_question.php">
-                    <label for="question">Въпрос:</label>
-                    <input type="text" id="question" name="question">
-                    <input type="hidden" name="doctor_id" value="<?php echo $id; ?>">
-                    <button type="submit" name="submitQuestionBtn">Изпрати</button>
-                </form>
-            </div>
+<div id="questionForm" style="display: none;">
+    <form method="post" action="submit_question.php">
+        <label for="question">Въпрос:</label>
+        <div class="input-container">
+            <input type="text" id="question" name="question">
+            <input type="hidden" name="doctor_id" value="<?php echo $id; ?>">
+            <button type="submit" name="submitQuestionBtn">Изпрати</button>
         </div>
-    </div>
-  <?php
-    include "questions_list.php";
-  ?>
+    </form>
 </div>
+<?php include "questions_list.php"; ?>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const askQuestionBtn = document.getElementById('askQuestionBtn');
         const questionForm = document.getElementById('questionForm');
 
         askQuestionBtn.addEventListener('click', function () {
-            questionForm.style.display = 'block';
+            if (questionForm.style.display === 'block') {
+                questionForm.style.display = 'none';
+            } else {
+                questionForm.style.display = 'block';
+            }
         });
     });
 </script>
 </body>
-
+</html>
