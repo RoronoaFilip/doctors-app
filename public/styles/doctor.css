@@ -3,6 +3,7 @@
     margin-right: 20px;
     border: 2px solid #ddd;
     border-radius: 50%;
+
 }
 
 .doctor-profile {
@@ -108,4 +109,9 @@
 
 .question-box p {
     margin: 0 0 10px;
+}
+
+.appointment-href {
+    color: #000;
+    text-decoration: none;
 }

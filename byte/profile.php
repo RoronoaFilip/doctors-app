@@ -38,7 +38,7 @@
     }
   ?>
 </section>
-<section class="appointments">
+<section class="appointments-container">
     <h3>Appointments:</h3>
   <?php
     include "shared/appointments_display.php";
