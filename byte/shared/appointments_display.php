@@ -36,20 +36,24 @@
 
   echo "<div class='appointments-wrapper'>";
 
-
-  echo "<div class='appointments'>";
+  echo "<div class='flex-column'>";
   echo "<h4>Previous Appointments:</h4>";
+  echo "<div class='appointments'>";
+
 
   displayAppointments($previousAppointments);
 
   echo "</div>";
+  echo "</div>";
 
 
-  echo "<div class='appointments'>";
+  echo "<div class='flex-column'>";
   echo "<h4>Upcoming Appointments:</h4>";
+  echo "<div class='appointments'>";
 
   displayAppointments($upcomingAppointments);
 
+  echo "</div>";
   echo "</div>";
 
   echo "</div>";

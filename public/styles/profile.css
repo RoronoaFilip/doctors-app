@@ -13,7 +13,7 @@ body {
     justify-content: flex-start;
     align-items: center;
 
-    width: 80%;
+    width: 67%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -22,6 +22,7 @@ body {
 
     &.edit {
         align-items: center;
+        justify-content: center;
         max-width: 80%;
     }
 }
@@ -47,7 +48,7 @@ body {
     gap: 10px;
 
     overflow-y: scroll;
-    width: 30%;
+    width: 70%;
     height: 100%;
 }
 
@@ -58,8 +59,25 @@ body {
 }
 
 .profile h2 {
-    margin-bottom: 20px;
+    margin: 5px 5px 15px 5px;
     color: #333;
     font-size: 34px;
     text-align: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+}
+
+.profile-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }

@@ -47,18 +47,20 @@ EOT;
 EOT;
   }
 
-  $items .= <<<EOT
-            <div class="button-wrapper">
-            $editButton
-            EOT;
   if ($userType === 'DOCTOR') {
     $items .= <<<EOT
-          <button type="button" class="question-button" onclick="location.href='/byte/answer_questions.php'">Отговори на въпроси</button>
+          <div class="button-wrapper">
+            $editButton
+            <button type="button" class="question-button" onclick="location.href='/byte/answer_questions.php'">Отговори на въпроси</button>
+          </div>
+EOT;
+  } else {
+    $items .= <<<EOT
+          $editButton
 EOT;
   }
 
   $items .= <<<EOT
-            </div>
         </ul>
     </section>
 </section>

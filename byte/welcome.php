@@ -10,18 +10,38 @@
 <body>
 
 <?php
-  require_once 'shared/header.php'
+  require_once 'shared/header.php';
+
+  if (isset($_SESSION['id'])) {
+    header('Location: /byte/main.php');
+    exit;
+  }
 ?>
 
 <div class="container">
-    <h2 class="text-center header-title">Gradeview</h2>
-    <section class="box-center">
-        <img class="image" src="" alt="image with a pen"/>
-    </section>
-    <p class="text-center">Система за резервация на ресторанти.</p>
+    <h1 class="header-title">Добре дошли в Byte.</h1>
 
-    <a class="button is-link" href="/byte/login.php">Влез</a>
-    <a class="button is-link" href="/byte/register.php">Регистрация</a>
+    <section>
+        <h4 class="header-title">Тук можете лесно и удобно да резервирате час при лекар или пък да задавате
+            въпроси.</h4>
+    </section>
+
+    <section class="register-login-prompt">
+        <section class="prompt">
+            <h2>Регистрация</h2>
+            <p>Ако все още нямате акаунт, можете да се регистрирате от тук.</p>
+            <button type="button" class="prompt-button" onclick="location.href='/byte/register.php'">Регистрация
+            </button>
+        </section>
+
+        <hr class="line-vertical"/>
+
+        <section class="prompt">
+            <h2>Вход</h2>
+            <p>Ако вече имате акаунт, можете да влезете от тук.</p>
+            <button type="button" class="prompt-button" onclick="location.href='/byte/login.php'">Вход</button>
+        </section>
+    </section>
 </div>
 
 </body>

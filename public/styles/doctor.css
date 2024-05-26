@@ -2,8 +2,6 @@
     max-width: 32%;
     margin-right: 20px;
     border: 2px solid #ddd;
-    border-radius: 50%;
-
 }
 
 .doctor-profile {
@@ -36,7 +34,7 @@
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #5d4037;
+    background-color: #1b25c1;
     color: white;
     font-size: 16px;
     cursor: pointer;
@@ -44,7 +42,7 @@
 }
 
 .button-container button:hover {
-    background-color: #5d4037;
+    background-color: #111887;
 }
 
 #questionForm {
@@ -80,7 +78,7 @@
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #5d4037;
+    background-color: #1b25c1;
     color: white;
     font-size: 16px;
     cursor: pointer;
@@ -88,14 +86,14 @@
 }
 
 #questionForm button:hover {
-    background-color: #5d4037;
+    background-color: #141a8e;
 }
 
 .questions-container {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Space between each question box */
-    width: 80%; /* Ensure container takes up full width */
+    gap: 15px;
+    width: 80%;
 }
 
 .question-box {
@@ -104,7 +102,7 @@
     border-radius: 10px;
     background-color: #f9f9f9;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Ensure question boxes take up full width */
+    width: 100%;
 }
 
 .question-box p {
@@ -112,6 +110,6 @@
 }
 
 .appointment-href {
-    color: #000;
+    color: #fff;
     text-decoration: none;
 }
