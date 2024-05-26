@@ -5,7 +5,7 @@
 
   session_start();
 
-  $targetDir = '/public/profile_pictures/';
+  $targetDir = '/public/photos/';
   $imagePath = $_FILES['profilePicture']['tmp_name'];
   $targetPath = $targetDir . $_SESSION['email'] . '.png';
 
