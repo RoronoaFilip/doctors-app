@@ -12,10 +12,10 @@
       $comment = $appointment->comment;
 
       echo "<div class='appointment'>";
-      echo "<h3>Appointment with Dr. {$doctor->firstName} {$doctor->lastName}</h3>";
-      echo "<p>Date: $date</p>";
-      echo "<p>Patient: {$user->firstName} {$user->lastName}</p>";
-      echo "<p>Comment: $comment</p>";
+      echo "<h3>Преглед при др. {$doctor->firstName} {$doctor->lastName}</h3>";
+      echo "<p>Дата: $date</p>";
+      echo "<p>Пациент: {$user->firstName} {$user->lastName}</p>";
+      echo "<p>Коментар: $comment</p>";
       echo "</div>";
     }
   }
@@ -37,7 +37,7 @@
   echo "<div class='appointments-wrapper'>";
 
   echo "<div class='flex-column'>";
-  echo "<h4>Previous Appointments:</h4>";
+  echo "<h4>Минали прегледи:</h4>";
   echo "<div class='appointments'>";
 
 
@@ -48,7 +48,7 @@
 
 
   echo "<div class='flex-column'>";
-  echo "<h4>Upcoming Appointments:</h4>";
+  echo "<h4>Предстоящи прегледи:</h4>";
   echo "<div class='appointments'>";
 
   displayAppointments($upcomingAppointments);

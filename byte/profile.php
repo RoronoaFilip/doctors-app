@@ -42,7 +42,7 @@
 <?php
   if (!isset($_GET['edit'])) {
     echo "<section class='appointments-container'>";
-    echo "<h3>Appointments:</h3>";
+    echo "<h3>Прегледи:</h3>";
     include "shared/appointments_display.php";
     echo "</section>";
   }

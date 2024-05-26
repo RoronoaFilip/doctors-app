@@ -31,19 +31,19 @@ EOT;
 
   $items = <<<EOT
 <section class="profile">
-    <h2>Profile Information</h2>
+    <h2>Профил:</h2>
     <section class="name-pic">
         <img class="profile-picture" src="$profilePictureUrl" alt="profile-picture">
         <ul class="profile-info">
-            <li><strong>Name:</strong> $fullName</li>
-            <li><strong>Email:</strong> $email</li>
-            <li><strong>Phone:</strong> $phone</li>
+            <li><strong>Име:</strong> $fullName</li>
+            <li><strong>Електронна поща:</strong> $email</li>
+            <li><strong>Телефон:</strong> $phone</li>
 EOT;
 
   if ($userType === 'DOCTOR') {
     $items .= <<<EOT
-            <li><strong>Specialty:</strong> $specialty</li>
-            <li><strong>Education:</strong> $education</li>
+            <li><strong>Специалност:</strong> $specialty</li>
+            <li><strong>Образование:</strong> $education</li>
 EOT;
   }
 
