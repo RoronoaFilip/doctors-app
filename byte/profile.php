@@ -29,7 +29,7 @@
 ?>
 
 
-<section class="profile-info">
+<section class="profile-info-wrapper">
   <?php
     if (isset($_GET['edit'])) {
       include 'shared/profile_form_edit.php';
@@ -38,11 +38,15 @@
     }
   ?>
 </section>
-<section class="appointments-container">
-    <h3>Appointments:</h3>
-  <?php
+
+<?php
+  if (!isset($_GET['edit'])) {
+    echo "<section class='appointments-container'>";
+    echo "<h3>Appointments:</h3>";
     include "shared/appointments_display.php";
-  ?>
-</section>
+    echo "</section>";
+  }
+?>
+
 </body>
 </html>

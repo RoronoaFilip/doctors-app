@@ -1,3 +1,9 @@
+:root {
+    --border-color: #424ac3;
+    --text-color: #262dac;
+    --button-color: #2b329c;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -14,7 +20,7 @@ body {
     gap: 10px;
 
     padding: 10px;
-    border: 2px solid #795548;
+    border: 2px solid var(--border-color);
     border-radius: 10px;
     background-color: #efebe9;
 }
@@ -30,7 +36,7 @@ body {
     height: 20%;
 
     padding: 10px;
-    border: 1px solid #795548;
+    border: 1px solid var(--border-color);
     border-radius: 10px;
     background-color: #efebe9;
 
@@ -41,26 +47,26 @@ body {
 
 .page-title {
     text-align: center;
-    color: #5d4037;
+    color: var(--text-color);
 }
 
 .form-label {
     display: block;
     margin-bottom: 5px;
-    color: #5d4037;
+    color: var(--text-color);
 }
 
 .form-control {
     width: 80%;
     padding: 10px;
-    border: 1px solid #795548;
+    border: 1px solid var(--text-color);
     border-radius: 5px;
 }
 
 .form-select {
     width: 80%;
     padding: 10px;
-    border: 1px solid #795548;
+    border: 1px solid var(--text-color);
     border-radius: 5px;
 }
 
@@ -69,14 +75,14 @@ body {
     padding: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #795548;
+    background-color: var(--button-color);
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .submit-button:hover {
-    background-color: #6d4c41;
+    background-color: #151e9f;
 }
 
 

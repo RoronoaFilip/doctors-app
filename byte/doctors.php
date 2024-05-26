@@ -53,10 +53,10 @@
 
     <section class="search-bar">
 
-        <form class="search-form" method="POST" action="">
+        <form class="form" method="POST" action="">
             <input type="text" class="form-control" name="name" placeholder="Търсене по име">
             <input type="text" class="form-control" name="specialty" placeholder="Търсене по специалност">
-            <button type="submit" class="btn primary-btn">Търсене</button>
+            <button type="submit" class="profile-button">Търсене</button>
         </form>
     </section>
 

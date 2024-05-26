@@ -25,8 +25,7 @@
     padding: 1rem;
     border: 1px solid #ddd;
     border-radius: 10px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #8db5ff;
 
     p, h3 {
         margin: 10px;
@@ -43,7 +42,6 @@
 .doctor-photo {
     width: 100px;
     height: 100px;
-    border-radius: 50%;
     object-fit: cover;
 }
 
@@ -52,7 +50,7 @@
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #5d4037;
+    background-color: #1b25c1;
     color: white;
     font-size: 16px;
     cursor: pointer;
@@ -60,5 +58,18 @@
 }
 
 .profile-button:hover {
-    background-color: #5d4037;
+    background-color: #141b8c;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    width: 90%;
+    margin: 2rem;
+}
+
+.form {
+    width: 50%;
 }
