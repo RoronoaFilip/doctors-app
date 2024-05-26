@@ -12,59 +12,59 @@
   if (isset($_POST['errorUploadingImage'])) {
     $errorUploadingImage = <<<EOT
     <div class="error-message">
-        <p>There was an error uploading the image. Please try again.</p>
+        <p>Грешка при качването на снимката. Опитайте пак!</p>
     </div>
 EOT;
   }
 
   $items = <<<EOT
 <section class="profile edit">
-    <h2 class="page-title">Profile Information</h2>
+    <h2 class="page-title">Профил:</h2>
     <section class="edit-form-wrapper">
         <section class="edit-section picture">
             <form class="form" method="post" action="/handlers/profile_picture_edit.php" enctype="multipart/form-data">
-            <h3>Edit Profile Picture</h3>
+            <h3>Смяна на Профилната Снимка</h3>
             <img class="profile-picture" src="$profilePictureUrl" alt="profile-picture">
               <fieldset class="input-wrapper">
-                <label class="form-label">Change Profile Picture</label>
+                <label class="form-label">Смяна на снимка</label>
                 <input class="form-control" type="file" name="profilePicture" id="profilePicture" accept="image/*">
               </fieldset>
               $errorUploadingImage
-              <button class="submit-button" type="submit">Upload Picture</button>
+              <button class="submit-button" type="submit">Качване на снимка</button>
             </form>
         </section>
         <section class="edit-section info">
             <form action="/handlers/save_profile.php" method="post" class="form">
-                <h3>Edit Profile</h3>
+                <h3>Промяна на профила</h3>
                 
                 <fieldset class="input-wrapper">
-                    <label class="form-label" for="firstName">First Name</label>
-                    <input class="form-control" type="text" id="firstName" placeholder="First Name" name="firstName" value="$firstName">
+                    <label class="form-label" for="firstName">Име</label>
+                    <input class="form-control" type="text" id="firstName" placeholder="Име" name="firstName" value="$firstName">
                 </fieldset>      
     
                 <fieldset class="input-wrapper">
-                    <label class="form-label" for="lastName">Last Name</label>
-                    <input class="form-control" type="text" id="surname" placeholder="Last Name" name="lastName" value="$lastName">
+                    <label class="form-label" for="lastName">Фамилия</label>
+                    <input class="form-control" type="text" id="surname" placeholder="Фамилия" name="lastName" value="$lastName">
                 </fieldset>
                 
                 <fieldset class="input-wrapper hidden">
-                    <label class="form-label" for="specialty">Specialty</label>
+                    <label class="form-label" for="specialty">Специалност</label>
                     <input class="form-control" type="text" id="specialty" placeholder="Специалност" name="specialty" value="$specialty">
                 </fieldset>      
     
                 <fieldset class="input-wrapper hidden">
-                    <label class="form-label" for="education">Education</label>
-                    <input class="form-control" type="text" id="education" placeholder="Education" name="education" value="$education">
+                    <label class="form-label" for="education">Образование</label>
+                    <input class="form-control" type="text" id="education" placeholder="Образование" name="education" value="$education">
                 </fieldset>
                 
                 <fieldset class="input-wrapper">
-                    <label class="form-label" for="email">Email</label>
-                    <input class="form-control" type="email" id="email" placeholder="Email" name="email" value="$email" required>
+                    <label class="form-label" for="email">Електронна поща</label>
+                    <input class="form-control" type="email" id="email" placeholder="Електронна поща" name="email" value="$email" required>
                 </fieldset>
                 
                 <fieldset class="input-wrapper">
-                    <label class="form-label" for="phone">Phone</label>
-                    <input class="form-control" type="tel" id="phone" placeholder="Phone" name="phone" value="$phone">
+                    <label class="form-label" for="phone">Телефон</label>
+                    <input class="form-control" type="tel" id="phone" placeholder="Телефон" name="телефон" value="$phone">
                 </fieldset>
     
                 <button class="submit-button" type="submit">Save Profile</button>
