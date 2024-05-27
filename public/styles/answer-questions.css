@@ -1,9 +1,8 @@
-/* answer-questions.css */
 .questions-container {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Space between each question box */
-    width: 100%; /* Ensure container takes up full width */
+    gap: 15px;
+    width: 40%;
 }
 
 .question-box {
