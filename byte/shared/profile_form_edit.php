@@ -67,7 +67,7 @@ EOT;
                     <input class="form-control" type="tel" id="phone" placeholder="Телефон" name="телефон" value="$phone">
                 </fieldset>
     
-                <button class="submit-button" type="submit">Save Profile</button>
+                <button class="submit-button" type="submit">Запази</button>
             </form>
         </section>
     </section>

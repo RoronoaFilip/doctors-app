@@ -42,8 +42,8 @@
   $appointmentRedirectUrl = '/byte/appointments.php?doctorId=' . $id;
 ?>
 <div class="button-container">
-    <button type="button" class=""><a class="appointment-href" href="<?= $appointmentRedirectUrl ?>">Направи
-            Резервация</a></button>
+    <button type="button" class=""><a class="appointment-href" href="<?= $appointmentRedirectUrl ?>">Запази Час</a>
+    </button>
     <button type="button" id="askQuestionBtn">Задай Въпрос</button>
 </div>
 <div id="questionForm" style="display: none;">

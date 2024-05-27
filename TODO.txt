@@ -1,0 +1,3 @@
+Remove admin Role from dropdown in registration and from the Database
+Do not let an appointment be created in the past
+If there are no questions, show a message saying there are no questions
