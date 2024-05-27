@@ -64,7 +64,7 @@ EOT;
                 
                 <fieldset class="input-wrapper">
                     <label class="form-label" for="phone">Телефон</label>
-                    <input class="form-control" type="tel" id="phone" placeholder="Телефон" name="телефон" value="$phone">
+                    <input class="form-control" type="tel" id="phone" placeholder="Телефон" name="phone" value="$phone">
                 </fieldset>
     
                 <button class="submit-button" type="submit">Запази</button>

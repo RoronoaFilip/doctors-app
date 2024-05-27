@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2024 at 07:31 PM
+-- Generation Time: May 27, 2024 at 08:42 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -46,7 +46,10 @@ INSERT INTO `appointments` (`id`, `doctor_id`, `user_id`, `date`, `comment`) VAL
 (4, 11, 12, '2025-07-15 10:00:00', 'Year 2025'),
 (5, 11, 12, '2026-07-15 10:00:00', 'Year 2026'),
 (6, 26, 2, '2024-05-31 20:33:00', 'Test Create Future'),
-(7, 26, 2, '2024-05-06 20:31:00', 'Test Create Past');
+(7, 26, 2, '2024-05-06 20:31:00', 'Test Create Past'),
+(8, 11, 2, '2024-05-30 13:41:00', 'Test 213213'),
+(9, 11, 12, '2024-02-15 21:21:00', 'з123123'),
+(10, 11, 12, '2024-03-15 21:22:00', '12312');
 
 -- --------------------------------------------------------
 
@@ -65,7 +68,7 @@ CREATE TABLE `doctors_info` (
 --
 
 INSERT INTO `doctors_info` (`id`, `specialty`, `education`) VALUES
-(11, 'Dermatologist', 'Sofia Medical University'),
+(11, 'Дерматолог', 'Медицински Университет София'),
 (26, 'Зъболекар', 'Доктор');
 
 -- --------------------------------------------------------
@@ -106,7 +109,13 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`id`, `doctor_id`, `user_id`, `question`, `answer`) VALUES
-(3, 26, 2, 'asd', NULL);
+(3, 26, 2, 'asd', NULL),
+(4, 11, 2, 'Zdr', 'здр'),
+(5, 11, 2, 'zdr 2', 'здр2'),
+(6, 11, 2, 'zdr3', 'здр3'),
+(7, 11, 2, 'zdr4', 'zd5641231234'),
+(8, 11, 2, 'zdr5', '123123'),
+(9, 11, 12, '123123123213', '123213');
 
 -- --------------------------------------------------------
 
@@ -116,12 +125,12 @@ INSERT INTO `questions` (`id`, `doctor_id`, `user_id`, `question`, `answer`) VAL
 
 CREATE TABLE `users` (
   `id` bigint(20) NOT NULL COMMENT 'primary key',
-  `first_name` varchar(50) DEFAULT NULL COMMENT 'the user''s first name',
-  `last_name` varchar(50) DEFAULT NULL COMMENT 'the user''s last name',
+  `first_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'the user''s first name',
+  `last_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'the user''s last name',
   `user_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'USER' COMMENT 'foreign key to user''s type',
   `email` varchar(50) NOT NULL COMMENT 'the user''s email',
-  `password` varchar(300) NOT NULL COMMENT 'the user''s password',
-  `phone` varchar(50) DEFAULT NULL COMMENT 'the user''s phone',
+  `password` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'the user''s password',
+  `phone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'the user''s phone',
   `profile_picture_id` bigint(60) NOT NULL DEFAULT 1 COMMENT 'Foreign Key to the Profile picture'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci COMMENT='A table that represents a user';
 
@@ -131,9 +140,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `user_type`, `email`, `password`, `phone`, `profile_picture_id`) VALUES
 (1, 'Filip', 'Filchev', 'ADMIN', 'filip@email.com', '$2y$10$QdXJrjhm0UAqE9rA36x1H.D31w5tqR7y4kK7ra5nTJkq5azE9wHNa', NULL, 1),
-(2, 'admin', 'adminov', 'ADMIN', 'admin@admin.admin', '$2y$10$Ac6yjsOXdq8tIrHwfFCNdeDJpofDQGU4zlhTdRjXAbhBTT7R8gg0e', NULL, 1),
-(11, 'Doctor', 'Doctorov', 'DOCTOR', 'doctor@doctor.com', '$2y$10$lviQpfPc/wE4fgyeQbssfOFw6HcYeFukT/nBLRxESO6U3fCdcKQ2C', '+123456', 1),
-(12, 'user', 'userov', 'USER', 'user@user.com', '$2y$10$td/LB4feU39ntij6VOlVxuj2qghsVUlSkgXIvCw8.uoap32LxSuYm', NULL, 1),
+(2, 'admin', 'adminov', 'ADMIN', 'admin@admin.admin', '$2y$10$Ac6yjsOXdq8tIrHwfFCNdeDJpofDQGU4zlhTdRjXAbhBTT7R8gg0e', '+00000', 1),
+(11, 'Доктор', 'Докторов', 'DOCTOR', 'doctor@doctor.com', '$2y$10$lviQpfPc/wE4fgyeQbssfOFw6HcYeFukT/nBLRxESO6U3fCdcKQ2C', '123123', 1),
+(12, 'user', 'userov', 'USER', 'user@user.com', '$2y$10$td/LB4feU39ntij6VOlVxuj2qghsVUlSkgXIvCw8.uoap32LxSuYm', '+12412421', 1),
 (26, 'Doki', 'Dok', 'DOCTOR', 'doktora@abv.bg', '$2y$10$L.u.dxRBozNytUxMM0NEeu1YWiICowAffIgo1YsoQ08rLt.EYWIwi', '08888888', 1);
 
 -- --------------------------------------------------------
@@ -211,19 +220,19 @@ ALTER TABLE `user_types`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'the appointments id', AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'the appointments id', AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `photos`
 --
 ALTER TABLE `photos`
-  MODIFY `id` bigint(60) NOT NULL AUTO_INCREMENT COMMENT 'ID of the photo', AUTO_INCREMENT=25;
+  MODIFY `id` bigint(60) NOT NULL AUTO_INCREMENT COMMENT 'ID of the photo', AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` bigint(60) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(60) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
