@@ -20,6 +20,12 @@
     }
   }
 
+  function getTimestamp(DateTime $dateTime): int
+  {
+    $newDate = new DateTime($dateTime->format('Y-m-d H:i'));
+    return $newDate->getTimestamp();
+  }
+
   $appointmentRepository = new AppointmentRepository();
 
   $userId = $_SESSION['id'];
@@ -31,8 +37,9 @@
     $appointments = $appointmentRepository->getByUserId($userId);
   }
 
-  $previousAppointments = array_filter($appointments, fn($appointment) => $appointment->date < new DateTime());
-  $upcomingAppointments = array_filter($appointments, fn($appointment) => $appointment->date >= new DateTime());
+  $currentDateTime = new DateTime('now', new DateTimeZone('Europe/Sofia'));
+  $previousAppointments = array_filter($appointments, fn($appointment) => getTimestamp($appointment->date) < getTimestamp($currentDateTime));
+  $upcomingAppointments = array_filter($appointments, fn($appointment) => getTimestamp($appointment->date) >= getTimestamp($currentDateTime));
 
   echo "<div class='appointments-wrapper'>";
 

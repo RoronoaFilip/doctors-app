@@ -34,7 +34,6 @@
         <select class="form-select" id="userType" name="userType">
             <option value="USER" selected>Потребител</option>
             <option value="DOCTOR">Лекар</option>
-            <option value="ADMIN">Администратор</option>
         </select>
     </fieldset>
     <fieldset class="input-wrapper">

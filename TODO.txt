@@ -1,1 +1,0 @@
-Remove admin Role from dropdown in registration and from the Database
