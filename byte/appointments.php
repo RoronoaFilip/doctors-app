@@ -33,11 +33,11 @@
     <h4>Запазвате час за <?= $doctor->firstName . ' ' . $doctor->lastName ?></h4>
     <fieldset class="input-wrapper">
         <label for="date" class="form-label">Дата</label>
-        <input type="datetime-local" min="6" class="form-control" id="date" name="date">
+        <input type="datetime-local" class="form-control" id="date" name="date">
     </fieldset>
     <fieldset class="input-wrapper">
         <label for="comment" class="form-label">Коментар</label>
-        <input type="text" min="6" class="form-control" id="comment" name="comment">
+        <input type="text" class="form-control" id="comment" name="comment">
     </fieldset>
   <?php
     echo "<input type='hidden' min='6' class='form-control' id='doctorId' name='doctorId' value='$doctorId'>"
@@ -47,5 +47,20 @@
   ?>
     <button type="submit" class="submit-button">Запазване на час</button>
 </form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      var dateTimeInput = document.getElementById('date');
+      var now = new Date();
+      var year = now.getFullYear();
+      var month = ('0' + (now.getMonth() + 1)).slice(-2);
+      var day = ('0' + now.getDate()).slice(-2);
+      var hours = ('0' + now.getHours()).slice(-2);
+      var minutes = ('0' + now.getMinutes()).slice(-2);
+      
+      var minDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+      dateTimeInput.min = minDateTime;
+  });
+</script>
 </body>
 </html>

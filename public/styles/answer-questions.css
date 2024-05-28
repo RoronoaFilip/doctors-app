@@ -41,3 +41,9 @@
 .question-button:hover {
     background-color: #141a8e;
 }
+
+.no-more-questions {
+    color: white;
+    text-align: center;
+    margin-top: 40px;
+}
