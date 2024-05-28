@@ -23,7 +23,7 @@
 <section>
     <h1 class="hello-message">Здравей, <?= $fullName ?></h1>
     <h4>От тук можеш да направиш следното:</h4>
-    <ul>
+    <ul class="options-box">
         <li><a href="/byte/profile.php" class="main-link">Разгледай своя профил</a></li>
         <li><a href="/byte/doctors.php" class="main-link">Виж всички лекари</a></li>
     </ul>

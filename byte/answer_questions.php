@@ -22,19 +22,25 @@
   $questions = $questionsRepository->getNotAnsweredQuestions($doctor->id) ?? [];
 
   $items = '';
-  foreach ($questions as $question) {
-    $items .= '<div class="question-box">';
-    $items .= '<div>';
-    $items .= '<p> Въпрос: ' . $question->question . '</p>';
-    $items .= '<form method="POST" action="process_question.php">';
-    $items .= '<input type="hidden" name="question_id" value="' . $question->id . '">';
-    $items .= '<label for="answer">Отговор: </label>';
-    $items .= '<input type="text" id="answer" name="answer">';
-    $items .= '<button type="submit" class="question-button">Запази отговор</button>';
-    $items .= '</form>';
-    $items .= '</div>';
-    $items .= '</div>';
+  if($questions) {
+    foreach ($questions as $question) {
+      $items .= '<div class="question-box">';
+      $items .= '<div>';
+      $items .= '<p> Въпрос: ' . $question->question . '</p>';
+      $items .= '<form method="POST" action="process_question.php">';
+      $items .= '<input type="hidden" name="question_id" value="' . $question->id . '">';
+      $items .= '<label for="answer">Отговор: </label>';
+      $items .= '<input type="text" id="answer" name="answer">';
+      $items .= '<button type="submit" class="question-button">Запази отговор</button>';
+      $items .= '</form>';
+      $items .= '</div>';
+      $items .= '</div>';
+    }
+  } 
+  else {
+    $items .= '<h1 class="no-more-questions">Лиспват въпроси без отговор.</h1>';
   }
+  
 
   echo '<section class="questions-container">';
   echo $items;
