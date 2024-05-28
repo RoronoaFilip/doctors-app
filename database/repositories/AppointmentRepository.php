@@ -3,6 +3,7 @@
   namespace repositories;
 
   use DateTime;
+  use DateTimeZone;
   use models\Appointment;
 
   require_once __DIR__ . '/Repository.php';
@@ -55,7 +56,7 @@
           $foundAppointment['id'],
           $doctor,
           $user,
-          new DateTime($foundAppointment['date']),
+          new DateTime($foundAppointment['date'], new DateTimeZone('Europe/Sofia')),
           $foundAppointment['comment']
       );
     }

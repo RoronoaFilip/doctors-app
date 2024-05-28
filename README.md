@@ -6,5 +6,6 @@
 
 1. Копирайте и поставете съдържанието на директорията в `htdocs` директорията на `XAMPP`.
 2. Стартирайте `Apache` и `MySQL` в `XAMPP Control Panel`.
-3. Отворете phpMyAdmin и създайте база данни с име `byte`.
-4. Импортирайте файла `database/byte.sql` в базата данни.
+3. Отворете phpMyAdmin и създайте потребител с username: `admin` и password: `admin`.
+4. Създайте празна база данни с име `byte`.
+5. Импортирайте файла `database/byte.sql` в базата данни с име byte.
