@@ -123,6 +123,9 @@ CREATE TABLE `users` (
   `profile_picture_id` bigint(60) NOT NULL DEFAULT 1 COMMENT 'Foreign Key to the Profile picture'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci COMMENT='A table that represents a user';
 
+
+
+
 --
 -- Dumping data for table `users`
 --

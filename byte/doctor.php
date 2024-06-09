@@ -45,6 +45,8 @@
     <button type="button" class=""><a class="appointment-href" href="<?= $appointmentRedirectUrl ?>">Запази Час</a>
     </button>
     <button type="button" id="askQuestionBtn">Задай Въпрос</button>
+    <button type="button" id="giveReview">Дай рейтинг</button>
+    <button type="button" id="seeReview">Виж рейтинги</button>
 </div>
 <div id="questionForm" style="display: none;">
     <form method="post" action="submit_question.php">
@@ -56,17 +58,38 @@
         </div>
     </form>
 </div>
+<div id="reviewForm" style="display: none;">
+    <form method="post" action="submit_question.php">
+        <label for="question">Коментар:</label>
+        <div class="input-container">
+            <input type="text" id="question" name="question">
+            <input type="hidden" name="doctor_id" value="<?php echo $id; ?>">
+            <button type="submit" name="submitQuestionBtn">Изпрати</button>
+        </div>
+    </form>
+</div>
 <?php include "questions_list.php"; ?>
+<!-- reviews list!!!! -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const askQuestionBtn = document.getElementById('askQuestionBtn');
         const questionForm = document.getElementById('questionForm');
+
+        const giveReviewBtn = document.getElementById('giveReview');
+        const reviewForm = document.getElementById('reviewForm');
 
         askQuestionBtn.addEventListener('click', function () {
             if (questionForm.style.display === 'block') {
                 questionForm.style.display = 'none';
             } else {
                 questionForm.style.display = 'block';
+            }
+        });
+        giveReviewBtn.addEventListener('click', function () {
+            if (reviewForm.style.display === 'block') {
+                reviewForm.style.display = 'none';
+            } else {
+                reviewForm.style.display = 'block';
             }
         });
     });
