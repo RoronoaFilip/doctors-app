@@ -18,10 +18,13 @@
   $doctorRepository = new DoctorRepository();
   $questionsRepository = new QuestionRepository();
 
+//   reviewRep
+
   $id = $_GET['id'];
   $doctor = $doctorRepository->getById($id);
   $questions = $questionsRepository->getQuestions($id) ?? [];
 
+//   getreviews
   $item = '<div class="doctor-profile">';
   $item .= '<img class="doctor-picture" src="' . $doctor->profilePicture->url . '" alt="profile picture">';
   $item .= '<div class="doctor-info">';
