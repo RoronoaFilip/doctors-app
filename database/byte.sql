@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 10, 2024 at 09:30 PM
+-- Generation Time: Jun 10, 2024 at 09:58 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,16 +40,7 @@ CREATE TABLE `appointments` (
 --
 
 INSERT INTO `appointments` (`id`, `doctor_id`, `user_id`, `date`, `comment`) VALUES
-(1, 11, 12, '2024-07-15 10:00:00', 'Some description for a Test Appointment'),
-(2, 11, 12, '2023-07-15 10:00:00', 'Year 2023'),
-(3, 11, 12, '2024-07-15 10:00:00', 'Year 2024'),
-(4, 11, 12, '2025-07-15 10:00:00', 'Year 2025'),
-(5, 11, 12, '2026-07-15 10:00:00', 'Year 2026'),
-(6, 26, 2, '2024-05-31 20:33:00', 'Test Create Future'),
-(7, 26, 2, '2024-05-06 20:31:00', 'Test Create Past'),
-(8, 11, 2, '2024-05-30 13:41:00', 'Test 213213'),
-(9, 11, 12, '2024-02-15 21:21:00', 'з123123'),
-(10, 11, 12, '2024-03-15 21:22:00', '12312');
+(1, 11, 12, '2024-07-15 10:00:00', 'Some description for a Test Appointment');
 
 -- --------------------------------------------------------
 
@@ -68,8 +59,7 @@ CREATE TABLE `doctors_info` (
 --
 
 INSERT INTO `doctors_info` (`id`, `specialty`, `education`) VALUES
-(11, 'Дерматолог', 'Медицински Университет София'),
-(26, 'Зъболекар', 'Доктор');
+(11, 'Дерматолог', 'Медицински Университет София');
 
 -- --------------------------------------------------------
 
@@ -103,19 +93,6 @@ CREATE TABLE `questions` (
   `question` varchar(500) NOT NULL,
   `answer` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `questions`
---
-
-INSERT INTO `questions` (`id`, `doctor_id`, `user_id`, `question`, `answer`) VALUES
-(3, 26, 2, 'asd', NULL),
-(4, 11, 2, 'Zdr', 'здр'),
-(5, 11, 2, 'zdr 2', 'здр2'),
-(6, 11, 2, 'zdr3', 'здр3'),
-(7, 11, 2, 'zdr4', 'zd5641231234'),
-(8, 11, 2, 'zdr5', '123123'),
-(9, 11, 12, '123123123213', '123213');
 
 -- --------------------------------------------------------
 
@@ -163,8 +140,7 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `user_type`, `email`, `pas
 (1, 'Filip', 'Filchev', 'ADMIN', 'filip@email.com', '$2y$10$QdXJrjhm0UAqE9rA36x1H.D31w5tqR7y4kK7ra5nTJkq5azE9wHNa', NULL, 1),
 (2, 'admin', 'adminov', 'ADMIN', 'admin@admin.admin', '$2y$10$Ac6yjsOXdq8tIrHwfFCNdeDJpofDQGU4zlhTdRjXAbhBTT7R8gg0e', '+00000', 1),
 (11, 'Доктор', 'Докторов', 'DOCTOR', 'doctor@doctor.com', '$2y$10$lviQpfPc/wE4fgyeQbssfOFw6HcYeFukT/nBLRxESO6U3fCdcKQ2C', '123123', 1),
-(12, 'user', 'userov', 'USER', 'user@user.com', '$2y$10$td/LB4feU39ntij6VOlVxuj2qghsVUlSkgXIvCw8.uoap32LxSuYm', '+12412421', 1),
-(26, 'Doki', 'Dok', 'DOCTOR', 'doktora@abv.bg', '$2y$10$L.u.dxRBozNytUxMM0NEeu1YWiICowAffIgo1YsoQ08rLt.EYWIwi', '08888888', 1);
+(12, 'user', 'userov', 'USER', 'user@user.com', '$2y$10$td/LB4feU39ntij6VOlVxuj2qghsVUlSkgXIvCw8.uoap32LxSuYm', '+12412421', 1);
 
 -- --------------------------------------------------------
 
