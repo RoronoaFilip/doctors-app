@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 09, 2024 at 12:46 PM
+-- Generation Time: Jun 10, 2024 at 09:30 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -126,10 +126,17 @@ INSERT INTO `questions` (`id`, `doctor_id`, `user_id`, `question`, `answer`) VAL
 CREATE TABLE `reviews` (
   `id` bigint(60) NOT NULL,
   `doctor_id` bigint(60) DEFAULT NULL,
-  `user_id` bigint(60) DEFAULT NULL,
+  `client_id` bigint(60) DEFAULT NULL,
   `rating` bigint(60) NOT NULL,
   `comment` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reviews`
+--
+
+INSERT INTO `reviews` (`id`, `doctor_id`, `client_id`, `rating`, `comment`) VALUES
+(0, 11, 12, 5, 'lekuva rak');
 
 -- --------------------------------------------------------
 

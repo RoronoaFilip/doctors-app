@@ -2,51 +2,68 @@
 
 namespace repositories;
 
-require_once __DIR__ . '/Repository.php';
+use models\Review;
+
+require_once __DIR__ . '/UsersRepository.php';
+require_once __DIR__ . '/../../models/User.php';
+// should this below be here?
+require_once __DIR__ . '/Repository.php'; 
 require_once __DIR__ . '/../../models/Review.php';
 
-use models\Review;
 
 class ReviewRepository extends Repository
 {
     public function __construct()
     {
         parent::__construct('reviews');
+        $this->usersRepository = new UsersRepository();
     }
 
 
     public function create(Review $review): ?Review
     {
-      $this->insert([
-          'id' => $review->id,
+        $result = $this->insert([
           'doctor_id'=> $review->doctor_id,
           'client_id' => $review->client_id,
           'rating'=> $review->rating,
-          'comment' => $review->comment,
-          'created_at'=> $review->created_at
-      ]);
-      
+          'comment' => $review->comment
+        ]); 
+        if (!$result) {
+            return false;
+        }
+        return $this->getById($this->getLastInsertId());
+    }
+
+    private function constructReview($foundReview): ?Review
+    {
+      $review = new Review(
+          $foundReview['doctor_id'],
+          $foundReview['client_id'],
+          $foundReview['rating'],
+          $foundReview['comment']
+      );
+      $review->id = $foundReview['id'] ?? null;
+
       return $review;
     }
 
-    //construct review
-    //add review
-    public function addReview(Review $review): bool
+    public function getById($id): ?Review
     {
-        return $this->insert([
-            'doctor_id' => $review->doctor_id,
-            'client_id' => $review->client_id,
-            'rating' => $review->rating,
-            'comment' => $review->comment,
-            'created_at' => $review->created_at
-        ]);
+      $reviews = $this->select([
+          "id" => $id
+      ]);
+
+      if (!$reviews) {
+        return null;
+      }
+
+      return $this->constructReview($reviews[0]);
     }
 
-    //getAllReviews
-    public function getReviews($doctor_id): ?array
+    public function getReviews($doctorId): ?array
     {   
         $reviewsForDoctor = $this->select([
-            'doctor_id' => $doctor_id
+            'doctor_id' => $doctorId
         ]);
   
         $reviews = [];
@@ -55,37 +72,35 @@ class ReviewRepository extends Repository
             return null;
         }
 
-        //SHOULD BE question_for_doctor. what is this?
-        foreach ($reviewsForDoctor as $question_for_doctor) {
-          $reviews[] = $this->construcReview($question_for_doctor);
+        foreach ($reviewsForDoctor as $review_for_doctor) {
+          $reviews[] = $this->constructReview($review_for_doctor);
         }
   
-        return $questions;
+        return $reviews;
     }
 
-
-    ///???????????????
-    public function getReviewsByDoctorId($doctorId): array
+    public function getReviewById($reviewId): ?Review
     {
-        $command = 'SELECT * FROM ' . $this->tableName . ' WHERE doctor_id = :doctorId';
-        $query = $this->database->getConnection()->prepare($command);
-        $query->bindParam(':doctorId', $doctorId, PDO::PARAM_INT);
-        $query->execute();
-        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        $reviews = $this->select([
+          'id' => $reviewId
+        ]);
 
-        return array_map(function ($row) {
-            return new Review($row['id'], $row['doctor_id'], $row['client_id'], $row['rating'], $row['comment'], $row['created_at']);
-        }, $results);
+        if(!$reviews) {
+            return null;
+        }
+
+        return $this->constructReview($reviews[0]);
     }
 
-    public function addReview(Review $review): bool
+    //add review
+    /*public function addReview(Review $review): bool
     {
-        $data = [
-            'doctor_id' => $review->doctorId,
-            'client_id' => $review->userId,
+        return $this->insert([
+            'doctor_id' => $review->doctor_id,
+            'client_id' => $review->client_id,
             'rating' => $review->rating,
-            'comment' => $review->comment
-        ];
-        return $this->insert($data);
-    }
+            'comment' => $review->comment,
+            'created_at' => $review->created_at
+        ]);
+    }*/
 }
