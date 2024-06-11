@@ -22,7 +22,7 @@
   $questions = $questionsRepository->getNotAnsweredQuestions($doctor->id) ?? [];
 
   $items = '';
-  if($questions) {
+  if ($questions) {
     foreach ($questions as $question) {
       $items .= '<div class="question-box">';
       $items .= '<div>';
@@ -36,11 +36,10 @@
       $items .= '</div>';
       $items .= '</div>';
     }
-  } 
-  else {
-    $items .= '<h1 class="no-more-questions">Лиспват въпроси без отговор.</h1>';
+  } else {
+    $items .= '<h1 class="no-more-questions">Липсват въпроси без отговор.</h1>';
   }
-  
+
 
   echo '<section class="questions-container">';
   echo $items;

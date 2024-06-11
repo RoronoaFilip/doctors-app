@@ -13,7 +13,7 @@ body {
     justify-content: flex-start;
     align-items: center;
 
-    width: 67%;
+    width: 60%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -28,7 +28,7 @@ body {
 }
 
 .appointments-container {
-    height: 50%;
+    height: 48%;
 }
 
 .appointments-wrapper {

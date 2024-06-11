@@ -27,11 +27,11 @@
     </fieldset>
     <fieldset class="input-wrapper">
         <label for="email" class="form-label">Електронна поща</label>
-        <input type="email" class="form-control" id="email" name="email">
+        <input type="email" class="form-control" id="email" name="email" required>
     </fieldset>
     <fieldset class="input-wrapper">
         <label for="userType" class="form-label">Тип на потребителя</label>
-        <select class="form-select" id="userType" name="userType">
+        <select class="form-select" id="userType" name="userType" required>
             <option value="USER" selected>Потребител</option>
             <option value="DOCTOR">Лекар</option>
         </select>
@@ -46,11 +46,11 @@
     </fieldset>
     <fieldset class="input-wrapper">
         <label for="password" class="form-label">Парола</label>
-        <input type="password" min="6" class="form-control" id="password" name="password">
+        <input type="password" min="6" class="form-control" id="password" name="password" required>
     </fieldset>
     <fieldset class="input-wrapper">
         <label for="confirmPassword" class="form-label">Потвърди парола</label>
-        <input type="password" min="6" class="form-control" id="confirmPassword" name="confirmPassword">
+        <input type="password" min="6" class="form-control" id="confirmPassword" name="confirmPassword" required>
     </fieldset>
     <button type="submit" class="submit-button">Регистриране</button>
 </form>
