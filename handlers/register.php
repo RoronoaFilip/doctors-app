@@ -34,7 +34,6 @@
   $doctorRepository = new DoctorInfoRepository();
 
   if ($userRepository->getByEmail($email)) {
-    // TODO: move these echos (in login also) to the form and display them there
     echo "Потребител с този имейл вече съществуава. Моля избере друго потребителско име.";
     exit();
   }
