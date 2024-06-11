@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 10, 2024 at 09:58 PM
+-- Generation Time: Jun 11, 2024 at 07:27 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,7 +40,8 @@ CREATE TABLE `appointments` (
 --
 
 INSERT INTO `appointments` (`id`, `doctor_id`, `user_id`, `date`, `comment`) VALUES
-(1, 11, 12, '2024-07-15 10:00:00', 'Some description for a Test Appointment');
+(11, 30, 32, '2024-06-11 20:25:00', 'Може да закъснея около 5 минути. Извинявам се!'),
+(12, 30, 32, '2024-06-25 12:26:00', 'Вторичен преглед.');
 
 -- --------------------------------------------------------
 
@@ -59,7 +60,8 @@ CREATE TABLE `doctors_info` (
 --
 
 INSERT INTO `doctors_info` (`id`, `specialty`, `education`) VALUES
-(11, 'Дерматолог', 'Медицински Университет София');
+(30, 'Дерматолог', 'Софийски Медицински Университет'),
+(31, 'Зъболекар', 'Пловдивски Медицински Университет');
 
 -- --------------------------------------------------------
 
@@ -78,7 +80,8 @@ CREATE TABLE `photos` (
 --
 
 INSERT INTO `photos` (`id`, `photo_url`, `alt`) VALUES
-(1, '/public/photos/default_profile_picture.png', 'default_profile_picture');
+(1, '/public/photos/default_profile_picture.png', 'default_profile_picture'),
+(26, '/public/photos/dido@email.com.png', 'default_profile_picture');
 
 -- --------------------------------------------------------
 
@@ -93,6 +96,14 @@ CREATE TABLE `questions` (
   `question` varchar(500) NOT NULL,
   `answer` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `questions`
+--
+
+INSERT INTO `questions` (`id`, `doctor_id`, `user_id`, `question`, `answer`) VALUES
+(10, 30, 28, 'Каква е цената на прегледа Ви?', '50 лв.'),
+(11, 31, 28, 'Какво е работното Ви време?', '10ч. - 18ч.');
 
 -- --------------------------------------------------------
 
@@ -113,7 +124,8 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`id`, `doctor_id`, `client_id`, `rating`, `comment`) VALUES
-(0, 11, 12, 5, 'lekuva rak');
+(0, 30, 28, 5, 'Много добро отношение!'),
+(0, 31, 28, 3, 'Работи малко прибързано. Иначе нямам други забележки');
 
 -- --------------------------------------------------------
 
@@ -137,10 +149,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `user_type`, `email`, `password`, `phone`, `profile_picture_id`) VALUES
-(1, 'Filip', 'Filchev', 'ADMIN', 'filip@email.com', '$2y$10$QdXJrjhm0UAqE9rA36x1H.D31w5tqR7y4kK7ra5nTJkq5azE9wHNa', NULL, 1),
-(2, 'admin', 'adminov', 'ADMIN', 'admin@admin.admin', '$2y$10$Ac6yjsOXdq8tIrHwfFCNdeDJpofDQGU4zlhTdRjXAbhBTT7R8gg0e', '+00000', 1),
-(11, 'Доктор', 'Докторов', 'DOCTOR', 'doctor@doctor.com', '$2y$10$lviQpfPc/wE4fgyeQbssfOFw6HcYeFukT/nBLRxESO6U3fCdcKQ2C', '123123', 1),
-(12, 'user', 'userov', 'USER', 'user@user.com', '$2y$10$td/LB4feU39ntij6VOlVxuj2qghsVUlSkgXIvCw8.uoap32LxSuYm', '+12412421', 1);
+(28, 'Диан', 'Василев', 'USER', 'dido@email.com', '$2y$10$vIOY/jiV8XbP6HXok/DmqukTqM3s6/qA4/24le2ttec4CGxc2Akli', '+123456', 26),
+(30, 'Александър', 'Ангелов', 'DOCTOR', 'nacho@email.com', '$2y$10$qBQH0iFIqmseDBFrAmBClOdiqFrlguT4Q52HTxG80k04NG3oPYQhy', NULL, 1),
+(31, 'Филип', 'Филчев', 'DOCTOR', 'filip@email.com', '$2y$10$/NvaI.GIZjvvGpN.lL.5u.kLLd7jgN3AZNTHsYlD5HnNSh6LyXqZO', NULL, 1),
+(32, 'Иван', 'Иванов', 'USER', 'ivan@email.com', '$2y$10$ai8lMJiJdWrFcC6H3d/BDeHoHs0jHSiPXMBuUUXDEy85Z6SJiUVn.', '', 1);
 
 -- --------------------------------------------------------
 
@@ -157,7 +169,6 @@ CREATE TABLE `user_types` (
 --
 
 INSERT INTO `user_types` (`type`) VALUES
-('ADMIN'),
 ('DOCTOR'),
 ('USER');
 
@@ -217,25 +228,25 @@ ALTER TABLE `user_types`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'the appointments id', AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'the appointments id', AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `photos`
 --
 ALTER TABLE `photos`
-  MODIFY `id` bigint(60) NOT NULL AUTO_INCREMENT COMMENT 'ID of the photo', AUTO_INCREMENT=26;
+  MODIFY `id` bigint(60) NOT NULL AUTO_INCREMENT COMMENT 'ID of the photo', AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` bigint(60) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(60) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'primary key', AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'primary key', AUTO_INCREMENT=33;
 
 --
 -- Constraints for dumped tables
