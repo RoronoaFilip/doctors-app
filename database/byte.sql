@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2024 at 07:27 PM
+-- Generation Time: Jun 12, 2024 at 06:14 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -80,8 +80,7 @@ CREATE TABLE `photos` (
 --
 
 INSERT INTO `photos` (`id`, `photo_url`, `alt`) VALUES
-(1, '/public/photos/default_profile_picture.png', 'default_profile_picture'),
-(26, '/public/photos/dido@email.com.png', 'default_profile_picture');
+(1, '/public/photos/default_profile_picture.png', 'default_profile_picture');
 
 -- --------------------------------------------------------
 
@@ -149,7 +148,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `user_type`, `email`, `password`, `phone`, `profile_picture_id`) VALUES
-(28, 'Диан', 'Василев', 'USER', 'dido@email.com', '$2y$10$vIOY/jiV8XbP6HXok/DmqukTqM3s6/qA4/24le2ttec4CGxc2Akli', '+123456', 26),
+(28, 'Диан', 'Василев', 'USER', 'dido@email.com', '$2y$10$vIOY/jiV8XbP6HXok/DmqukTqM3s6/qA4/24le2ttec4CGxc2Akli', '+123456', 1),
 (30, 'Александър', 'Ангелов', 'DOCTOR', 'nacho@email.com', '$2y$10$qBQH0iFIqmseDBFrAmBClOdiqFrlguT4Q52HTxG80k04NG3oPYQhy', NULL, 1),
 (31, 'Филип', 'Филчев', 'DOCTOR', 'filip@email.com', '$2y$10$/NvaI.GIZjvvGpN.lL.5u.kLLd7jgN3AZNTHsYlD5HnNSh6LyXqZO', NULL, 1),
 (32, 'Иван', 'Иванов', 'USER', 'ivan@email.com', '$2y$10$ai8lMJiJdWrFcC6H3d/BDeHoHs0jHSiPXMBuUUXDEy85Z6SJiUVn.', '', 1);
@@ -203,6 +202,13 @@ ALTER TABLE `questions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `doctor_id` (`doctor_id`),
   ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD KEY `doctor_id_fk` (`doctor_id`),
+  ADD KEY `client_id_fk` (`client_id`);
 
 --
 -- Indexes for table `users`
@@ -271,6 +277,13 @@ ALTER TABLE `doctors_info`
 ALTER TABLE `questions`
   ADD CONSTRAINT `doctor_id` FOREIGN KEY (`doctor_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD CONSTRAINT `client_id_fk` FOREIGN KEY (`client_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `doctor_id_fk` FOREIGN KEY (`doctor_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `users`
